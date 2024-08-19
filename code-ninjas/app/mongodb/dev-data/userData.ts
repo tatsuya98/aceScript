@@ -1,4 +1,4 @@
-export const userData = [
+const userData = [
   {
     username: "gary",
     password: "1234",
@@ -18,3 +18,5 @@ export const userData = [
     problems_solved: [],
   },
 ];
+
+export default userData

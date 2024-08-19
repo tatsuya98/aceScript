@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest"
+    "test": "jest",
+    "seed": "ts-node ./app/mongodb/run-seed.ts"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
@@ -17,6 +18,7 @@
     "react-dom": "^18",
     "supertest": "^7.0.0",
     "ts-node": "^10.9.2"
+
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

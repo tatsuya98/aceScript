@@ -1,4 +1,4 @@
-import { testApiHandler } from "next-test-api-route-handler";
+import { testApiHandler } from "next-test-api-route-handler"; 
 import userData from "../app/mongodb/test-data/userData";
 import katasData from "../app/mongodb/test-data/katasData";
 import { client, db } from "../app/mongodb/connection";

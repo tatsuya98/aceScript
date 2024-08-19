@@ -1,5 +1,5 @@
-import { userData } from "./dev-data/userData";
-import { katasData } from "./dev-data/katasData";
+import  userData  from "./dev-data/userData";
+import  katasData  from "./dev-data/katasData";
 import seed from "./seed";
 import { client } from "./connection";
 

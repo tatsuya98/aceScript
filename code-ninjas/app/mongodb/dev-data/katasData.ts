@@ -1,4 +1,4 @@
-export const katasData = [
+const katasData = [
   {
     title: "dev kata",
     description: "test kata description",
@@ -18,3 +18,6 @@ export const katasData = [
     output: "",
   },
 ];
+
+
+export default katasData
