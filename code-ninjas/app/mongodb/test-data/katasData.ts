@@ -4,7 +4,7 @@ const katasData = [
     slug: "test-kata",
     description: "write a function",
     example: "1+1 expected output 2",
-    Language: "javascript",
+    language: "javascript",
     difficulty: "very hard",
     topic: "",
   },
