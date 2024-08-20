@@ -9,3 +9,10 @@ export async function GET(
   const response = await fetchUser(username);
   return NextResponse.json(response, { status: 200 });
 }
+
+export async function DELETE(
+  nextRequest: NextRequest,
+  { params: { username } }: { params: { username: String } }
+) {
+  const response =  
+}

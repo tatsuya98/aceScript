@@ -10,6 +10,7 @@ export  async function usersController() {
 
 export async function postUser(userDetails : userDetails){
   try{
+    
     const response = await createUser(userDetails)
     return response
   }catch(error){
