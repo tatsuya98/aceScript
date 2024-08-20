@@ -1,4 +1,3 @@
-import { BSONType } from "mongodb";
 import { client, db } from "./connection";
 
 export default async function seed(userData: any, kataData: any) {

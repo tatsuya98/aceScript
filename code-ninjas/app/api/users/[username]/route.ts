@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { changeUserDetails, fetchUser,  removeUser } from "./Model";
+import { changeUserDetails, fetchUser,  removeUser } from "./model";
 
 
 export async function GET(
@@ -30,3 +30,4 @@ export async function PATCH(
     return NextResponse.json('user does not exist', {status: 404})
   }
 }
+

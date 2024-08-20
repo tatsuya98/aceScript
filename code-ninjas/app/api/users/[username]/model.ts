@@ -1,4 +1,3 @@
-import { errorMonitor } from "stream";
 import { client, db } from "../../../mongodb/connection";
 
 export async function fetchUser(username: String) {
