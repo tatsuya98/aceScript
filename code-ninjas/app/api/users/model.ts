@@ -1,5 +1,6 @@
 import { client, db } from "../../mongodb/connection";
 
+
 export async function usersModel() {
   await client.connect();
   const users = db.collection("users");
