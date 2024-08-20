@@ -1,5 +1,6 @@
 import { client, db } from "../../mongodb/connection";
 import { generateHash } from "../utils/utils";
+import { z } from "zod";
 
 export async function usersModel() {
   await client.connect();
@@ -8,6 +9,12 @@ export async function usersModel() {
   await client.close();
   return allUsers;
 }
+const userDetailsSchema = z.object({
+  username: z.string().refine((value) => !/\s/.test(value), {
+    message: "Username must not contain spaces",
+  }),
+  password: z.string().min(6),
+});
 
 interface User {
   _id: string;
@@ -15,6 +22,7 @@ interface User {
 
 export async function createUser(userDetails: any) {
   try {
+    userDetailsSchema.parse(userDetails);
     const { password } = userDetails;
     const hashedPassword = await generateHash(password);
     await client.connect();
