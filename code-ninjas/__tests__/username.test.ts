@@ -71,6 +71,7 @@ describe("DELETE /api/users", () => {
       async test({ fetch }) {
         const response = await fetch({ method: "DELETE" });
         const message = await response.json();
+        console.log(message);
         expect(response.status).toBe(404);
         expect(message).toBe("User not found");
       },

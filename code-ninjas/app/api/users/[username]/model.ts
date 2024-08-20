@@ -26,9 +26,18 @@ export async function fetchUserLoginAttempt(
   if (correctPassword) return user;
 }
 
-export async function removeUser(user: string) {
+export async function removeUser(username: string) {
   await client.connect();
-  return db.collection("users").deleteOne({ username: user });
+  try {
+    const deleteSuccess = await db
+      .collection("users")
+      .deleteOne({ username: username });
+    return deleteSuccess;
+  } catch (error: any) {
+    throw error;
+  } finally {
+    client.close();
+  }
 }
 
 export async function changeUserDetails(username: string, userDetails: any) {
