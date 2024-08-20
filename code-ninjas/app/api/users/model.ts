@@ -1,5 +1,5 @@
 import { client, db } from "../../mongodb/connection";
-import { userDetails } from "./userController";
+
 
 export async function usersModel() {
   await client.connect();
