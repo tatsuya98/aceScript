@@ -1,7 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { changeUserDetails, fetchUser, removeUser } from "./model";
-import { handleMongoError } from "../../utils/mongoErrorHandler";
+import {
+  changeUserDetails,
+  fetchUser,
+  fetchUserLoginAttempt,
+  removeUser,
+} from "./model";
 import { handleUserNotFound } from "../../utils/errorHandler";
+import { handleMongoError } from "../../utils/mongoErrorHandler";
 
 export async function GET(
   nextRequest: NextRequest,
@@ -19,16 +24,20 @@ export async function GET(
     return Response.json({ message }, { status });
   }
 }
+export async function POST(
+  nextRequest: NextRequest,
+  { params: { username } }: { params: { username: string } }
+) {
+  const userDetails = await nextRequest.json();
+  const response = await fetchUserLoginAttempt(username, userDetails.password);
+  return NextResponse.json(response, { status: 200 });
+}
 
 export async function DELETE(
   nextRequest: NextRequest,
   { params: { username } }: { params: { username: string } }
 ) {
-  const { deletedCount } = await removeUser(username);
-  if (deletedCount === 0) {
-    return await handleUserNotFound();
-  }
-
+  await removeUser(username);
   return Response.json("User Succesfully Deleted", { status: 200 });
 }
 
