@@ -3,7 +3,14 @@ import { passwordLoginAttempt } from "../../utils/utils";
 
 export async function fetchUser(username: String) {
   await client.connect();
-  return db.collection("users").findOne({ username: username });
+  try {
+    const user = await db.collection("users").findOne({ username: username });
+    return user;
+  } catch (error: any) {
+    throw error;
+  } finally {
+    client.close();
+  }
 }
 export async function fetchUserLoginAttempt(
   username: string,

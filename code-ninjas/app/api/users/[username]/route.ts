@@ -5,13 +5,24 @@ import {
   fetchUserLoginAttempt,
   removeUser,
 } from "./model";
+import { handleUserNotFound } from "../../utils/errorHandler";
+import { handleMongoError } from "../../utils/mongoErrorHandler";
 
 export async function GET(
   nextRequest: NextRequest,
   { params: { username } }: { params: { username: string } }
 ) {
-  const response = await fetchUser(username);
-  return NextResponse.json(response, { status: 200 });
+  try {
+    let user = await fetchUser(username);
+    if (user === null) {
+      // Use the separate function to handle the case where the user is not found
+      return handleUserNotFound();
+    }
+    return Response.json(user, { status: 200 });
+  } catch (error: any) {
+    const { status, message } = handleMongoError(error);
+    return Response.json({ message }, { status });
+  }
 }
 export async function POST(
   nextRequest: NextRequest,
