@@ -9,6 +9,7 @@ export default async function seed(userData: any, kataData: any) {
         bsonType: "object",
         required: ["username", "password"],
         properties: {
+          _id: { bsonType: "objectId" },
           username: {
             bsonType: "string",
           },
@@ -27,7 +28,40 @@ export default async function seed(userData: any, kataData: any) {
     },
   });
   users.createIndex("username", { unique: true });
-  const katas = db.collection("katas");
+  const katas = await db.createCollection("katas", {
+    validator: {
+      $jsonSchema: {
+        bsonType: "object",
+        properties: {
+          _id: { bsonType: "objectId" },
+          title: {
+            bsonType: "string",
+          },
+          slug: {
+            bsonType: "string",
+          },
+          description: {
+            bsonType: "string",
+          },
+          example: {
+            bsonType: "string",
+          },
+          language: {
+            bsonType: "string",
+          },
+          difficulty: {
+            bsonType: "string",
+          },
+          topic: {
+            bsonType: "string",
+          },
+        },
+        additionalProperties: false,
+      },
+    },
+  });
+  katas.createIndex("slug", { unique: true });
+
   await users.insertMany(userData);
   await katas.insertMany(kataData);
 }
