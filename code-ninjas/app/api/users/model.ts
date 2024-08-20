@@ -1,5 +1,5 @@
 import { client, db } from "../../mongodb/connection";
-
+import { generateHash } from "../utils/utils";
 
 export async function usersModel() {
   await client.connect();
@@ -15,9 +15,12 @@ interface User {
 
 export async function createUser(userDetails: any) {
   try {
+    const { password } = userDetails;
+    const hashedPassword = await generateHash(password);
     await client.connect();
     const fullUserDetails = {
       ...userDetails,
+      password: hashedPassword.hash,
       problems_solved: [],
       avatar_url: "placeholder",
     };
