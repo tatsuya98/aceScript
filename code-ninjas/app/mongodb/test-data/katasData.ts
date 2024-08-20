@@ -6,9 +6,7 @@ const katasData = [
     example: "1+1 expected output 2",
     Language: "javascript",
     difficulty: "very hard",
-    input: "",
-    output: "",
-    topic: ""
+    topic: "",
   },
   {
     title: "test kata 2",
@@ -17,10 +15,8 @@ const katasData = [
     example: "kata example",
     language: "javascript",
     difficulty: "very hard",
-    input: "",
-    output: "",
-    topic: ""
+    topic: "",
   },
 ];
 
-export default katasData
+export default katasData;

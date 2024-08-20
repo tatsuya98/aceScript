@@ -4,11 +4,9 @@ const katasData = [
     slug: "dev-kata",
     description: "write a function",
     example: "1+1 expected output 2",
-    Language: "javascript",
+    language: "javascript",
     difficulty: "very hard",
-    input: "",
-    output: "",
-    topic: ""
+    topic: "hello",
   },
   {
     title: "dev kata 2",
@@ -17,11 +15,8 @@ const katasData = [
     example: "kata example",
     language: "javascript",
     difficulty: "very hard",
-    input: "",
-    output: "",
-    topic: ""
+    topic: "hello",
   },
 ];
 
-
-export default katasData
+export default katasData;
