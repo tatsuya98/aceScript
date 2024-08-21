@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Header from "./components/header";
+import UserContextProvider from "./Context/UserProvider";
 
 export const metadata: Metadata = {
 	title: "Create Next App",
@@ -11,10 +13,14 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	return (
-		<html lang="en">
-			<body>{children}</body>
 
-		</html>
-	);
+  return (
+    <html lang="en">
+      <body className={inter.className}>
+        <Header title="Code Ninjas" />
+        <UserContextProvider>{children}</UserContextProvider>
+      </body>
+    </html>
+  );
+
 }

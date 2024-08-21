@@ -6,25 +6,35 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest",
+    "seed": "ts-node ./app/mongodb/run-seed.ts"
   },
   "dependencies": {
     "@next/font": "^14.2.5",
+    "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
-    "jest": "^29.7.0",
     "mongodb": "^6.8.0",
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18",
-    "react-slick": "^0.30.2",
-    "swiper": "^11.1.9"
+    "supertest": "^7.0.0",
+    "ts-node": "^10.9.2",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.3",
+    "@babel/preset-typescript": "^7.24.7",
+    "@types/jest": "^29.5.12",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "babel-jest": "^29.7.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
+    "jest": "^29.7.0",
+    "next-test-api-route-handler": "^4.0.8",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
