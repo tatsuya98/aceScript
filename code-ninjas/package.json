@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest",
+    "test": "jest -i ./code-ninjas/__tests__",
     "seed": "ts-node ./app/mongodb/run-seed.ts"
   },
   "dependencies": {
