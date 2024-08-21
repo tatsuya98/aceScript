@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-
-html, body {
-  height: 100%
+html,
+body {
+  height: 100%;
 }
 
 body {
@@ -18,5 +18,8 @@ body {
 
 a {
   text-decoration: none;
-  color: inherit
+  color: inherit;
+}
+input {
+  color: #070815;
 }
