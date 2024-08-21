@@ -2,7 +2,7 @@ import { client, db } from "../../mongodb/connection";
 import { generateHash } from "../utils/utils";
 import { z } from "zod";
 
-export async function usersModel() {
+export async function fetchUsers() {
   await client.connect();
   const users = db.collection("users");
   const allUsers = await users.find().toArray();
