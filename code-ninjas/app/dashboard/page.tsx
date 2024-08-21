@@ -13,7 +13,7 @@ interface ResultData {
 
 const Dashboard: React.FC = () => {
   const [progress, setProgress] = useState<ResultData[]>([]);
-
+  const { user } = useContext(UserContext);
   useEffect(() => {
     // Placeholder for data fetching from mongoDB backend
     const fetchProgress = async () => {

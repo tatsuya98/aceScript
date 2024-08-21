@@ -13,7 +13,7 @@ export default function Login(): React.JSX.Element {
   const { setUser } = React.useContext(UserContext);
   const router = useRouter();
   const handleLogin = (): void => {
-    fetch(`/api/users/${username}`, {
+    fetch(`/api/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -27,12 +27,14 @@ export default function Login(): React.JSX.Element {
       .then((data) => {
         if (data.message) {
           setError(data.message);
+          return;
         }
 
         setUser({
           username: data.username,
           avatar: data.avatar_url,
           problems_solved: data.problems_solved,
+          isLoggedIn: true,
         });
         router.push("/dashboard");
       })

@@ -11,6 +11,8 @@
     "seed": "ts-node ./app/mongodb/run-seed.ts"
   },
   "dependencies": {
+    "@nextui-org/avatar": "^2.0.32",
+    "@nextui-org/dropdown": "^2.1.29",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
     "mongodb": "^6.8.0",
