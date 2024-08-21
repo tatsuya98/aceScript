@@ -5,6 +5,7 @@ import {
   fetchUserLoginAttempt,
   removeUser,
 } from "./model";
+import { z } from "zod";
 import { handleUserNotFound } from "../../utils/errorHandler";
 import { handleMongoError } from "../../utils/mongoErrorHandler";
 
@@ -28,9 +29,28 @@ export async function POST(
   nextRequest: NextRequest,
   { params: { username } }: { params: { username: string } }
 ) {
-  const userDetails = await nextRequest.json();
-  const response = await fetchUserLoginAttempt(username, userDetails.password);
-  return NextResponse.json(response, { status: 200 });
+  try {
+    const userDetails = await nextRequest.json();
+    const response = await fetchUserLoginAttempt(
+      username,
+      userDetails.password
+    );
+    console.log(response);
+    return NextResponse.json(response, { status: 200 });
+  } catch (error: any) {
+    console.error("Error creating user:", error);
+
+    // Check if the error is a ZodError (validation error)
+    if (error instanceof z.ZodError) {
+      return NextResponse.json({ message: error.errors }, { status: 400 });
+    }
+
+    // Handle other potential errors
+    return NextResponse.json(
+      { message: "Internal server error" },
+      { status: 500 }
+    );
+  }
 }
 
 export async function DELETE(
