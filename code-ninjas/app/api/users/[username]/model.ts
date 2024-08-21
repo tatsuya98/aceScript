@@ -18,12 +18,17 @@ export async function fetchUserLoginAttempt(
 ) {
   await client.connect();
   const user = await db.collection("users").findOne({ username: username });
-  if (!user) throw Error;
+  if (!user) throw Error("User does not exist");
   const correctPassword = await passwordLoginAttempt(
     userPasswordAttempt,
     user.password
   );
-  if (correctPassword) return user;
+  if (correctPassword) {
+    console.log("hello");
+    return user;
+  } else {
+    return Promise.reject({ message: "Incorrect password" });
+  }
 }
 
 export async function removeUser(username: string) {

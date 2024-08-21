@@ -35,21 +35,13 @@ export async function POST(
       username,
       userDetails.password
     );
-    console.log(response);
     return NextResponse.json(response, { status: 200 });
   } catch (error: any) {
-    console.error("Error creating user:", error);
-
     // Check if the error is a ZodError (validation error)
     if (error instanceof z.ZodError) {
       return NextResponse.json({ message: error.errors }, { status: 400 });
     }
-
-    // Handle other potential errors
-    return NextResponse.json(
-      { message: "Internal server error" },
-      { status: 500 }
-    );
+    return NextResponse.json({ message: error.message }, { status: 400 });
   }
 }
 
