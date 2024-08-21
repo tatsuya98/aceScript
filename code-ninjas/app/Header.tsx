@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import Hamburger from "./icons/Hamburger";
 import CodeSymbol from "./icons/CodeSymbol";
@@ -15,7 +16,7 @@ export default function Header() {
 		<>
 			<header className="flex justify-between h-20 items-center px-6 max-w-[1400px] m-auto fixed top-0 right-0 left-0 bg-[#070815] ">
 				<Link href="/" className="w-[150px]">
-					Logo
+					<Image src='/logo.png' width={70} height={70} alt='logo' />
 				</Link>
 				<button onClick={handleMenuToggle} className="sm:hidden">
 					<Hamburger />
