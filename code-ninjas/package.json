@@ -11,6 +11,7 @@
     "seed": "ts-node ./app/mongodb/run-seed.ts"
   },
   "dependencies": {
+    "@next/font": "^14.2.5",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
     "mongodb": "^6.8.0",
