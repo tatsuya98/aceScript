@@ -2,9 +2,9 @@ import Link from "next/link";
 
 export default function Hero() {
 	return (
-		<section>
+		<section className="max-w-7xl m-auto">
 			<div className="pt-10 mx-3 flex flex-col gap-6 text-center ">
-				<h1 className="font-medium text-5xl leading-[60px]">
+				<h1 className="font-medium text-5xl leading-[60px] max-w-5xl m-auto lg:text-6xl px-8 xl:mt-8  ">
 					Ace Your JavaScript Interviews with Hands-On Practice
 				</h1>
 				<p className="text-[#CBD5E1] max-w-lg  m-auto">

@@ -13,7 +13,7 @@ export default function Header() {
 	};
 	return (
 		<>
-			<header className="flex justify-between h-20 items-center px-6 max-w-[1400px] m-auto fixed top-0 right-0 left-0 bg-[#070815] ">
+			<header className="flex justify-between h-20 items-center px-6 max-w-7xl m-auto fixed top-0 right-0 left-0 bg-[#070815] z-10">
 				<Link href="/" className="w-[150px]">
 					Logo
 				</Link>

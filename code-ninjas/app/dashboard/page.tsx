@@ -64,6 +64,10 @@ const Dashboard: React.FC = () => {
       </table>
 
 
+
+
+
+
       <div style={{ textAlign: 'center' }}>
         <button
           // onClick={() => router.push('/detailed-report')}

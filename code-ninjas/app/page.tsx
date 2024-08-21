@@ -1,5 +1,4 @@
-import Image from "next/image";
-import Footer from "./Footer";
+import BrandsCarousel from "./HomeComponents/BrandsCarousel";
 import Hero from "./HomeComponents/Hero";
 
 export default function Home() {
@@ -7,8 +6,9 @@ export default function Home() {
 		<>
 			<main className="flex-1">
 				<Hero />
+				<BrandsCarousel />
 			</main>
-			<Footer />
+			
 		</>
 	);
 }
