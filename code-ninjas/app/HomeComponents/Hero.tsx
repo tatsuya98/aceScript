@@ -1,5 +1,7 @@
 import Link from "next/link";
-
+import Code from "../icons/Code";
+import Code2 from "../icons/ray-so-export (2).png";
+import Image from "next/image";
 export default function Hero() {
 	return (
 		<section className="max-w-7xl m-auto">
@@ -11,7 +13,10 @@ export default function Hero() {
 					Boost your coding skills with real-world JavaScript questions and an
 					interactive code editor.
 				</p>
-				<Link href="/dashboard" className="flex items-center justify-center border-[#BFDBFE] border-[0.5px] outline-none w-[200px] m-auto px-4 py-4 rounded-full text-[#BFDBFE] bg-[#BFDBFE1A]">
+				<Link
+					href="/dashboard"
+					className="flex items-center justify-center border-[#BFDBFE] border-[0.5px] outline-none w-[200px] m-auto px-4 py-4 rounded-full text-[#BFDBFE] bg-[#BFDBFE1A]"
+				>
 					<p>Start Practicing Now </p>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -29,14 +34,24 @@ export default function Hero() {
 					</svg>
 				</Link>
 			</div>
-      <div className="mt-8">
-        <div className="h-[500px] border-1 border-[#BFDBFE] flex items-center justify-center bg-[#BFDBFE1A]">Demo image of a question with code editor</div>
-      </div>
+			<div className="mt-8">
+				<div className="h-[500px] border-1 border-[#BFDBFE] flex items-center justify-center bg-[#BFDBFE1A]">
+					{/* <Image src={Code2} alt="Code" width={900} quality={100} layout="responsive" /> */}
+				</div>
+			</div>
 		</section>
 	);
 }
 {
-	/* <span>
+	/*
+	export default function mean(arr) {
+  if (arr.length === 0) return NaN;
+  const sum = arr.reduce((acc, val) => {
+    return acc + val;
+  }, 0);
+  return sum / arr.length;
+}
+	<span>
 Prepare confidently for your next interview with our tailored practice
 environment. Get instant feedback, refine your skills, and stand out
 from the competition.

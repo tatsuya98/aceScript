@@ -3,18 +3,14 @@
 @tailwind utilities;
 
 
-html, body {
-  height: 100%
-}
-
 body {
-  padding-top: 5rem;
+  color: white;
   display: flex;
   flex-direction: column;
   background-color: #070815;
-  color: white;
   height: 2000px;
   position: relative;
+  padding-top: 5rem;
 }
 
 a {
@@ -72,3 +68,4 @@ a {
   height: 100px;
   width: 200px;
 }
+

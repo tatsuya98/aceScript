@@ -11,13 +11,19 @@
     "seed": "ts-node ./app/mongodb/run-seed.ts"
   },
   "dependencies": {
+    "@radix-ui/react-accordion": "^1.2.0",
     "bcrypt": "^5.1.1",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
     "dotenv": "^16.4.5",
+    "lucide-react": "^0.429.0",
     "mongodb": "^6.8.0",
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18",
     "supertest": "^7.0.0",
+    "tailwind-merge": "^2.5.2",
+    "tailwindcss-animate": "^1.0.7",
     "ts-node": "^10.9.2",
     "zod": "^3.23.8"
   },
