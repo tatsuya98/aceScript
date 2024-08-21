@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "./components/header";
+import Header from "./Header";
 import UserContextProvider from "./Context/UserProvider";
 
 export const metadata: Metadata = {
@@ -16,8 +16,8 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Header title="Code Ninjas" />
+      <body >
+        <Header />
         <UserContextProvider>{children}</UserContextProvider>
       </body>
     </html>

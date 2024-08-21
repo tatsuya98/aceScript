@@ -1,5 +1,5 @@
+"use client"
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 
 interface ResultData {
   questionId: string;
@@ -12,7 +12,6 @@ interface ResultData {
 
 const Dashboard: React.FC = () => {
   const [progress, setProgress] = useState<ResultData[]>([]);
-  const router = useRouter();
 
   useEffect(() => {
     // Placeholder for data fetching from mongoDB backend
@@ -28,9 +27,9 @@ const Dashboard: React.FC = () => {
     fetchProgress();
   }, []);
 
-  const handleQuestionClick = (questionId: string) => {
-    router.push(`/questions/${questionId}`);  
-  };
+  // const handleQuestionClick = (questionId: string) => {
+  //   router.push(`/questions/${questionId}`);  
+  // };
 
   return (
     <div style={{ padding: '20px', width: '1200px', margin: '0 auto', background: 'black' }}>
@@ -49,9 +48,10 @@ const Dashboard: React.FC = () => {
         <tbody style={{}}>
           {progress.map((entry) => (
             <tr key={entry.questionId} style={{ backgroundColor: entry.status === 'completed' ? '#f0f8ff' : '#fff' }}>
-              <td style={{ padding: '10px', borderBottom: '1px solid #ddd', color: 'blue', cursor: 'pointer' }} onClick={() => handleQuestionClick(entry.questionId)}>
+              <td style={{ padding: '10px', borderBottom: '1px solid #ddd', color: 'blue', cursor: 'pointer' }} >
+
                 {entry.questionTitle}
-              </td>
+              </td>  
               <td style={{ padding: '10px', borderBottom: '1px solid #ddd', color: 'black' }}>{entry.difficulty}</td>
               <td style={{ padding: '10px', borderBottom: '1px solid #ddd', color: entry.status === 'completed' ? 'green' : 'red' }}>
                 {entry.status === 'completed' ? '✔️ Completed' : '⏳ Incomplete'}
@@ -63,9 +63,10 @@ const Dashboard: React.FC = () => {
         </tbody>
       </table>
 
+
       <div style={{ textAlign: 'center' }}>
         <button
-          onClick={() => router.push('/detailed-report')}
+          // onClick={() => router.push('/detailed-report')}
           style={{
             padding: '10px 20px',
             fontSize: '1.2rem',
@@ -82,6 +83,9 @@ const Dashboard: React.FC = () => {
       </div>
     </div>
   );
-};
+}; 
+
+
+// onClick={() => handleQuestionClick(entry.questionId)}
 
 export default Dashboard;
