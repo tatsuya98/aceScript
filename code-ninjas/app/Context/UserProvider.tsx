@@ -4,6 +4,7 @@ import * as React from "react";
 type User = null | {
   username: string;
   avatar: string;
+  problems_solved: [];
 };
 type UserContextType = {
   user: User;
@@ -14,6 +15,7 @@ const UserContextDefualtValues: UserContextType = {
     username: "bob",
     avatar:
       "https://www.iconpacks.net/icons/2/free-user-profile-icon-4255-thumb.png",
+    problems_solved: [],
   },
   setUser(user: User) {},
 };

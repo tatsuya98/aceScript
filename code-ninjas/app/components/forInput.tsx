@@ -18,6 +18,8 @@ export default function FormInput({
     input: string,
     inputFn: (input: string) => void
   ): void => {
+    console.log(input);
+
     inputFn(input);
   };
   const handleClick = (): void => {

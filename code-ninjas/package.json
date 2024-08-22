@@ -7,10 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest",
+    "test": "jest -i ./code-ninjas/__tests__",
     "seed": "ts-node ./app/mongodb/run-seed.ts"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
+    "@mui/x-charts": "^7.13.0",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
     "mongodb": "^6.8.0",
