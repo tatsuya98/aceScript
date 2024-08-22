@@ -44,6 +44,31 @@ export default function Header() {
           >
             <Account />
 
+
+	const handleMenuToggle = () => {
+		setShowSideMenu(!showSideMenu);
+	};
+	return (
+		<>
+			<header className="flex justify-between h-20 items-center px-6 max-w-7xl m-auto fixed top-0 right-0 left-0 bg-[#070815] z-10">
+				<Link href="/" className="w-[150px]">
+					Logo
+				</Link>
+				<button onClick={handleMenuToggle} className="sm:hidden">
+					<Hamburger />
+				</button>
+				<Link
+					href="/dashboard"
+					className="hidden sm:flex gap-2 items-center w-[150px]"
+				>
+					<CodeSymbol />
+					<p>Dashboard</p>
+				</Link>
+				<Link
+					href="/login"
+					className="hidden sm:flex gap-2 items-center w-[150px]"
+				>
+					<Account />
             <p>Sign In / Register</p>
           </Link>
         ) : (
