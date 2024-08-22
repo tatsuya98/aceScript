@@ -33,7 +33,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <div
-      className={"flex flex-col items-center justify-center bg-[070815] mt-0 m-20 min-w-[900px] py-10 px-10"}
+      className={"flex flex-col items-center justify-around bg-[070815] mt-0 m-auto sm:min-w-[600px] lg:min-w-[900px]"}
     >
       <h1
         className="text-4xl font-bold text-center mb-10 text-[#CBD5E1] "
@@ -42,7 +42,7 @@ const Dashboard: React.FC = () => {
       </h1>
 
       <table
-       className="w-4/5 text-sm text-left text-gray-500 dark:text-gray-400"
+       className=" w-4/5 text-lg text-center md:text-sm sm:text-left md:h-4/5 text-gray-500 dark:text-gray-400"
       >
         <thead>
           <tr>
@@ -52,13 +52,13 @@ const Dashboard: React.FC = () => {
               Title
             </th>
             <th
-             className="hidden lg:block px-6 py-3 text-white text-xl font-medium"
+             className="hidden lg:table-cell px-6 py-3 text-white text-xl font-medium"
               
             >
               Difficulty
             </th>
             <th
-             className="px-6 py-3 text-white text-xl font-medium"
+             className=" hidden sm:table-cell px-6 py-3 text-white text-xl font-medium"
               
             >
               Progress
@@ -74,8 +74,8 @@ const Dashboard: React.FC = () => {
                 {entry.title}
                 </Link>
               </td>  
-              <td className="hidden lg:block px-6 py-2" >{entry.difficulty}</td>
-              <td className={`px-4 py-2 ${ user?.problems_solved.includes(entry.slug) ? 'text-green-500' : 'text-red-500'}`}>
+              <td className="hidden lg:table-cell px-6 py-2" >{entry.difficulty}</td>
+              <td className={` hidden sm:table-cell px-4 py-2 ${ user?.problems_solved.includes(entry.slug) ? 'text-green-500' : 'text-red-500'}`}>
                 { user?.problems_solved.includes(entry.slug as string) ? '✔️ Completed' : '⏳ Incomplete'}
               </td>
             </tr>
