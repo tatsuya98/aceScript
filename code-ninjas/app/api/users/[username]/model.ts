@@ -1,4 +1,5 @@
 import { client, db } from "../../../mongodb/connection";
+import { handleNotFound } from "../../utils/errorHandler";
 import { passwordLoginAttempt } from "../../utils/utils";
 
 export async function fetchUser(username: String) {
@@ -11,19 +12,6 @@ export async function fetchUser(username: String) {
   } finally {
     client.close();
   }
-}
-export async function fetchUserLoginAttempt(
-  username: string,
-  userPasswordAttempt: string
-) {
-  await client.connect();
-  const user = await db.collection("users").findOne({ username: username });
-  if (!user) throw Error;
-  const correctPassword = await passwordLoginAttempt(
-    userPasswordAttempt,
-    user.password
-  );
-  if (correctPassword) return user;
 }
 
 export async function removeUser(username: string) {

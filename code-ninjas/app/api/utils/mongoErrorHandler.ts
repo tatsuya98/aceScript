@@ -9,7 +9,7 @@ export function handleMongoError(error: MongoError): {
     // Duplicate key error
     return {
       status: 400,
-      message: "This username already exists",
+      message: "This already exists",
     };
   } else if (error.code === 121) {
     // Validation error
