@@ -3,9 +3,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../Context/UserProvider";
 
 interface ResultData {
-  questionId: string;
-  questionTitle: string;
-  status: "completed" | "incomplete";
+  title: string;
+  slug: string;
+  status: 'completed' | 'incomplete';
   attempts: number;
 
   difficulty: "Easy" | "Medium" | "Hard";
@@ -15,36 +15,11 @@ const Dashboard: React.FC = () => {
   const [progress, setProgress] = useState<ResultData[]>([]);
   const { user } = useContext(UserContext);
   useEffect(() => {
-    // Placeholder for data fetching from mongoDB backend
     const fetchProgress = async () => {
-      const data = [
-        //this will be e.g. await axios.get('/api/user-progress', {params: {userName/userId}})
-        {
-          questionId: "question1",
-          questionTitle: "Two Sum",
-          status: "completed" as "completed",
-          attempts: 3,
-          score: 80,
-          difficulty: "Easy" as "Easy",
-        },
-        {
-          questionId: "question2",
-          questionTitle: "Longest Substring Without Repeating Characters",
-          status: "incomplete" as "incomplete",
-          attempts: 1,
-          score: null,
-          difficulty: "Medium" as "Medium",
-        },
-        {
-          questionId: "question3",
-          questionTitle: "Median of Two Sorted Arrays",
-          status: "completed" as "completed",
-          attempts: 2,
-          score: 90,
-          difficulty: "Hard" as "Hard",
-        },
-      ];
-      setProgress(data); //(response.data)
+      const data = await fetch('/api/katas').then((res) => res.json())
+      const kataData = data.response
+      setProgress(kataData);
+
     };
 
     fetchProgress();
@@ -131,24 +106,17 @@ const Dashboard: React.FC = () => {
             </th>
           </tr>
         </thead>
-        <tbody style={{}}>
+        <tbody style={{  }}>
           {progress.map((entry) => (
-            <tr
-              key={entry.questionId}
-              style={{
-                backgroundColor:
-                  entry.status === "completed" ? "#f0f8ff" : "#fff",
-              }}
-            >
-              <td
-                style={{
-                  padding: "10px",
-                  borderBottom: "1px solid #ddd",
-                  color: "blue",
-                  cursor: "pointer",
-                }}
-              >
-                {entry.questionTitle}
+
+            <tr key={entry.slug} style={{ backgroundColor: entry.status === 'completed' ? '#f0f8ff' : '#fff' }}>
+              <td style={{ padding: '10px', borderBottom: '1px solid #ddd', color: 'blue', cursor: 'pointer' }} >
+
+                {entry.title}
+              </td>  
+              <td style={{ padding: '10px', borderBottom: '1px solid #ddd', color: 'black' }}>{entry.difficulty}</td>
+              <td style={{ padding: '10px', borderBottom: '1px solid #ddd', color: entry.status === 'completed' ? 'green' : 'red' }}>
+                {entry.status === 'completed' ? '✔️ Completed' : '⏳ Incomplete'}
               </td>
               <td
                 style={{
