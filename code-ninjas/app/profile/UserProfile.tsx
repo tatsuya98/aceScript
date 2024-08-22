@@ -11,52 +11,57 @@ const UserProfile: React.FC = () => {
   
    const handleUpdateImage = async () => {
 
-    // possible logic to update the profile image--still working on this
-    alert('Update Image clicked');
-    // 
-    //     const file = await selectImageFile(); // Open file picker (not shown)
-    //     const formData = new FormData();
-    //     formData.append('file', file);
-      
-    //     try {
-    //       const response = await fetch('/api/upload-avatar', {
-    //         method: 'POST',
-    //         body: formData,
-    //       });
-    //       const data = await response.json();
-    //       setAvatar(data.imageUrl); 
-    //     } catch (error) {
-    //       console.error('Error updating image:', error);
-    //     }
-    //   };
-      
+
+
+      const filePicker = document.createElement('input');
+      filePicker.type = 'file';
+      filePicker.accept = 'image/*';
+      filePicker.onchange = async (event) => {
+        const file = event.target.files[0];
+        const formData = new FormData();
+        formData.append('file', file);
+    
+        try {
+          const response = await fetch('/api/upload-avatar', {
+            method: 'POST',
+            body: formData,
+          });
+          const data = await response.json();
+          setAvatar(data.imageUrl); 
+        } catch (error) {
+          console.error('Error updating image:', error);
+        }
+      };
+      filePicker.click();
+   }
+    
+    
 
    
-  };
+  
 
-  const handleDeleteProfile = () => {
-    // Logic to delete the profile // async () => {
-    //     try {
-    //       const response = await fetch('/api/delete-profile', {
-    //         method: 'DELETE',
-    //       });
-    //       if (response.ok) {
-    //         alert('Profile deleted');
-    //         router.push('/'); // home page after delete
-    //       } else {
-    //         console.error('Failed to delete profile');
-    //       }
-    //     } catch (error) {
-    //       console.error('Error deleting profile:', error);
-    //     }
-    //   };
-    alert('Delete Profile clicked');
-  };
+  const handleDeleteProfile = async () => {
+        try {
+          const response = await fetch('/api/delete-profile', {
+            method: 'DELETE',
+          });
+          if (response.ok) {
+            alert('Profile deleted');
+            router.push('/'); // home page after delete
+          } else {
+            console.error('Failed to delete profile');
+          }
+        } catch (error) {
+          console.error('Error deleting profile:', error);
+        }
+      };
+  //  alert('Delete Profile clicked');
+ 
 
   const handleSeeProgress = () => {
     router.push('/dashboard'); 
   }
-  
+
 
   return (
     <div style={{
@@ -140,6 +145,5 @@ const UserProfile: React.FC = () => {
       </button>
     </div>
   );
-};
-
+}
 export default UserProfile;

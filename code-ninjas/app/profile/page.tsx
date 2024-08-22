@@ -2,8 +2,10 @@
 import React from 'react';
 import UserProfile from './UserProfile';
 
+
+
 const dummyData = {
-  avatarUrl: '', //  <-----if empty string defaults to default avatar.
+  avatarUrl: '', 
   username: 'JohnDoe',
 
 };
