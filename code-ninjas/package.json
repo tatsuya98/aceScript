@@ -11,12 +11,13 @@
     "seed": "ts-node ./app/mongodb/run-seed.ts"
   },
   "dependencies": {
-    "@radix-ui/react-accordion": "^1.2.0",
-    "@nextui-org/avatar": "^2.0.32",
-    "@nextui-org/dropdown": "^2.1.29",
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
+    "@monaco-editor/react": "^4.6.0",
     "@mui/x-charts": "^7.13.0",
+    "@nextui-org/avatar": "^2.0.32",
+    "@nextui-org/dropdown": "^2.1.29",
+    "@radix-ui/react-accordion": "^1.2.0",
     "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",

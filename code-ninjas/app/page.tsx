@@ -1,7 +1,7 @@
 import BrandsCarousel from "./HomeComponents/BrandsCarousel";
-import FAQs from "./HomeComponents/FAQs";
 import Features from "./HomeComponents/Features";
 import Hero from "./HomeComponents/Hero";
+import FAQs from "./HomeComponents/FAQs";
 
 export default function Home() {
 	return (
