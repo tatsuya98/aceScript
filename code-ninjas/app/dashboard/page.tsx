@@ -7,7 +7,6 @@ interface ResultData {
   slug: string;
   status: 'completed' | 'incomplete';
   attempts: number;
-
   difficulty: "Easy" | "Medium" | "Hard";
 }
 
@@ -20,14 +19,17 @@ const Dashboard: React.FC = () => {
       const kataData = data.response
       setProgress(kataData);
 
-    };
+      // below hardcoded in is problems solved in user array to mark them as complete
+      // shows type error but is working
+      user?.problems_solved.push('make-counter')
+      user?.problems_solved.push('mean')
+      user?.problems_solved.push('flatten')
 
+    };
+    console.log(user)
     fetchProgress();
   }, []);
 
-  // const handleQuestionClick = (questionId: string) => {
-  //   router.push(`/questions/${questionId}`);
-  // };
 
   return (
     <div
@@ -93,17 +95,6 @@ const Dashboard: React.FC = () => {
             >
               Status
             </th>
-            <th
-              style={{
-                padding: "10px",
-                textAlign: "left",
-                borderBottom: "2px solid #ddd",
-                fontSize: "1.2rem",
-                color: "white",
-              }}
-            >
-              Attempts
-            </th>
           </tr>
         </thead>
         <tbody style={{  }}>
@@ -116,36 +107,7 @@ const Dashboard: React.FC = () => {
               </td>  
               <td style={{ padding: '10px', borderBottom: '1px solid #ddd', color: 'black' }}>{entry.difficulty}</td>
               <td style={{ padding: '10px', borderBottom: '1px solid #ddd', color: entry.status === 'completed' ? 'green' : 'red' }}>
-                {entry.status === 'completed' ? '✔️ Completed' : '⏳ Incomplete'}
-              </td>
-              <td
-                style={{
-                  padding: "10px",
-                  borderBottom: "1px solid #ddd",
-                  color: "black",
-                }}
-              >
-                {entry.difficulty}
-              </td>
-              <td
-                style={{
-                  padding: "10px",
-                  borderBottom: "1px solid #ddd",
-                  color: entry.status === "completed" ? "green" : "red",
-                }}
-              >
-                {entry.status === "completed"
-                  ? "✔️ Completed"
-                  : "⏳ Incomplete"}
-              </td>
-              <td
-                style={{
-                  padding: "10px",
-                  borderBottom: "1px solid #ddd",
-                  color: "black",
-                }}
-              >
-                {entry.attempts}
+                { user?.problems_solved.includes(entry.slug as string) ? '✔️ Completed' : '⏳ Incomplete'}
               </td>
             </tr>
           ))}
@@ -154,7 +116,6 @@ const Dashboard: React.FC = () => {
 
       <div style={{ textAlign: "center" }}>
         <button
-          // onClick={() => router.push('/detailed-report')}
           style={{
             padding: "10px 20px",
             fontSize: "1.2rem",
@@ -166,13 +127,12 @@ const Dashboard: React.FC = () => {
             boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
           }}
         >
-          View Detailed Report
+          Place holder Button? detailed report?
         </button>
       </div>
     </div>
   );
 };
 
-// onClick={() => handleQuestionClick(entry.questionId)}
 
 export default Dashboard;
