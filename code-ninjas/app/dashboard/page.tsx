@@ -1,11 +1,11 @@
 "use client";
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../Context/UserProvider";
-
+import { useRouter } from "next/navigation";
 interface ResultData {
   title: string;
   slug: string;
-  status: 'completed' | 'incomplete';
+  status: "completed" | "incomplete";
   attempts: number;
 
   difficulty: "Easy" | "Medium" | "Hard";
@@ -14,12 +14,15 @@ interface ResultData {
 const Dashboard: React.FC = () => {
   const [progress, setProgress] = useState<ResultData[]>([]);
   const { user } = useContext(UserContext);
+  const router = useRouter();
   useEffect(() => {
+    if (!user?.isLoggedIn) {
+      router.push("/login");
+    }
     const fetchProgress = async () => {
-      const data = await fetch('/api/katas').then((res) => res.json())
-      const kataData = data.response
+      const data = await fetch("/api/katas").then((res) => res.json());
+      const kataData = data.response;
       setProgress(kataData);
-
     };
 
     fetchProgress();
@@ -106,17 +109,44 @@ const Dashboard: React.FC = () => {
             </th>
           </tr>
         </thead>
-        <tbody style={{  }}>
+        <tbody style={{}}>
           {progress.map((entry) => (
-
-            <tr key={entry.slug} style={{ backgroundColor: entry.status === 'completed' ? '#f0f8ff' : '#fff' }}>
-              <td style={{ padding: '10px', borderBottom: '1px solid #ddd', color: 'blue', cursor: 'pointer' }} >
-
+            <tr
+              key={entry.slug}
+              style={{
+                backgroundColor:
+                  entry.status === "completed" ? "#f0f8ff" : "#fff",
+              }}
+            >
+              <td
+                style={{
+                  padding: "10px",
+                  borderBottom: "1px solid #ddd",
+                  color: "blue",
+                  cursor: "pointer",
+                }}
+              >
                 {entry.title}
-              </td>  
-              <td style={{ padding: '10px', borderBottom: '1px solid #ddd', color: 'black' }}>{entry.difficulty}</td>
-              <td style={{ padding: '10px', borderBottom: '1px solid #ddd', color: entry.status === 'completed' ? 'green' : 'red' }}>
-                {entry.status === 'completed' ? '✔️ Completed' : '⏳ Incomplete'}
+              </td>
+              <td
+                style={{
+                  padding: "10px",
+                  borderBottom: "1px solid #ddd",
+                  color: "black",
+                }}
+              >
+                {entry.difficulty}
+              </td>
+              <td
+                style={{
+                  padding: "10px",
+                  borderBottom: "1px solid #ddd",
+                  color: entry.status === "completed" ? "green" : "red",
+                }}
+              >
+                {entry.status === "completed"
+                  ? "✔️ Completed"
+                  : "⏳ Incomplete"}
               </td>
               <td
                 style={{

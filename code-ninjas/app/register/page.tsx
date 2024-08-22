@@ -1,13 +1,16 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import FormInput from "../components/forInput";
 import Link from "next/link";
-
+import { UserContext } from "../Context/UserProvider";
+import { useRouter } from "next/navigation";
 export default function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isAllInputFilled, setIsAllInputFilled] = useState(false);
   const [error, setError] = useState("");
+  const { setUser } = useContext(UserContext);
+  const router = useRouter();
   const handleRegister = (): void => {
     fetch("/api/users", {
       method: "POST",
@@ -23,10 +26,15 @@ export default function Register() {
       .then((data) => {
         if (data.message) {
           setError(data.message);
+        } else {
+          setUser({
+            username: data.username,
+            avatar: data.avatar_url,
+            problems_solved: data.problems_solved,
+            isLoggedIn: true,
+          });
+          router.push("/dashboard");
         }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
       });
   };
 

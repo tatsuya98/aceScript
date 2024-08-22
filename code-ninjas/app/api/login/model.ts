@@ -14,6 +14,7 @@ export async function fetchUserLoginAttempt(
     userPasswordAttempt,
     user.password
   );
+
   if (!correctPassword) throw error;
   return user;
 }
