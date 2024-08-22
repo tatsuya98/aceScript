@@ -15,16 +15,17 @@ export default function FAQs() {
 				className=""
 			>
 				<AccordionItem value="item-1">
-					<AccordionTrigger>Is it accessible?</AccordionTrigger>
+					<AccordionTrigger>Is it animated?</AccordionTrigger>
 					<AccordionContent>
-						Yes. It adheres to the WAI-ARIA design pattern.
+						Yes. It&apos;s animated by default, but you can disable it if you
+						prefer.
 					</AccordionContent>
 				</AccordionItem>
-				<AccordionItem value="item-2">
-					<AccordionTrigger>Is it styled?</AccordionTrigger>
+        <AccordionItem value="item-2">
+					<AccordionTrigger>Is it animated?</AccordionTrigger>
 					<AccordionContent>
-						Yes. It comes with default styles that matches the other
-						components&apos; aesthetic.
+						Yes. It&apos;s animated by default, but you can disable it if you
+						prefer.
 					</AccordionContent>
 				</AccordionItem>
 				<AccordionItem value="item-3">
