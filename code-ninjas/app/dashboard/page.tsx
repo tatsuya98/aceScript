@@ -1,6 +1,7 @@
 "use client";
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../Context/UserProvider";
+import Link from "next/link";
 
 interface ResultData {
   title: string;
@@ -26,110 +27,61 @@ const Dashboard: React.FC = () => {
       user?.problems_solved.push('flatten')
 
     };
-    console.log(user)
     fetchProgress();
   }, []);
 
 
   return (
     <div
-      style={{
-        padding: "20px",
-        width: "1200px",
-        margin: "0 auto",
-        background: "black",
-      }}
+      className={"flex flex-col items-center justify-center bg-[070815] mt-0 m-20 min-w-[900px] py-10 px-10"}
     >
       <h1
-        style={{
-          fontSize: "2.5rem",
-          fontWeight: "bold",
-          textAlign: "center",
-          marginBottom: "20px",
-          color: "white",
-        }}
+        className="text-4xl font-bold text-center mb-10 text-[#CBD5E1] "
       >
-        User Progress
+        Challenges
       </h1>
 
       <table
-        style={{
-          width: "100%",
-          borderCollapse: "collapse",
-          marginBottom: "20px",
-          color: "black",
-        }}
+       className="w-4/5 text-sm text-left text-gray-500 dark:text-gray-400"
       >
         <thead>
           <tr>
             <th
-              style={{
-                padding: "10px",
-                textAlign: "left",
-                borderBottom: "2px solid #ddd",
-                fontSize: "1.2rem",
-                color: "white",
-              }}
+             className="px-6 py-3 text-white text-xl font-medium"
             >
-              Question Title
+              Title
             </th>
             <th
-              style={{
-                padding: "10px",
-                textAlign: "left",
-                borderBottom: "2px solid #ddd",
-                fontSize: "1.2rem",
-                color: "white",
-              }}
+             className="hidden lg:block px-6 py-3 text-white text-xl font-medium"
+              
             >
               Difficulty
             </th>
             <th
-              style={{
-                padding: "10px",
-                textAlign: "left",
-                borderBottom: "2px solid #ddd",
-                fontSize: "1.2rem",
-                color: "white",
-              }}
+             className="px-6 py-3 text-white text-xl font-medium"
+              
             >
-              Status
+              Progress
             </th>
           </tr>
         </thead>
-        <tbody style={{  }}>
+        <tbody className="text-white">
           {progress.map((entry) => (
 
-            <tr key={entry.slug} style={{ backgroundColor: entry.status === 'completed' ? '#f0f8ff' : '#fff' }}>
-              <td style={{ padding: '10px', borderBottom: '1px solid #ddd', color: 'blue', cursor: 'pointer' }} >
-
+            <tr key={entry.slug} className="border-b dark:border-gray-700 bg-[1e2042]">
+              <td className="px-6 py-2" >
+                <Link href={`/katas/${entry.slug}`}>
                 {entry.title}
+                </Link>
               </td>  
-              <td style={{ padding: '10px', borderBottom: '1px solid #ddd', color: 'black' }}>{entry.difficulty}</td>
-              <td style={{ padding: '10px', borderBottom: '1px solid #ddd', color: entry.status === 'completed' ? 'green' : 'red' }}>
+              <td className="hidden lg:block px-6 py-2" >{entry.difficulty}</td>
+              <td className={`px-4 py-2 ${ user?.problems_solved.includes(entry.slug) ? 'text-green-500' : 'text-red-500'}`}>
                 { user?.problems_solved.includes(entry.slug as string) ? '✔️ Completed' : '⏳ Incomplete'}
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-
-      <div style={{ textAlign: "center" }}>
-        <button
-          style={{
-            padding: "10px 20px",
-            fontSize: "1.2rem",
-            backgroundColor: "#007BFF",
-            color: "#fff",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-            boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-          }}
-        >
-          Place holder Button? detailed report?
-        </button>
-      </div>
     </div>
   );
 };
