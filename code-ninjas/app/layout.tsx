@@ -16,8 +16,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header />
-        <UserContextProvider>{children}</UserContextProvider>
+        <UserContextProvider>
+          <Header />
+          {children}
+        </UserContextProvider>
       </body>
     </html>
   );

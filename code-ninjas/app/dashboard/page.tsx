@@ -13,7 +13,7 @@ interface ResultData {
 
 const Dashboard: React.FC = () => {
   const [progress, setProgress] = useState<ResultData[]>([]);
-
+  const { user } = useContext(UserContext);
   useEffect(() => {
     const fetchProgress = async () => {
       const data = await fetch('/api/katas').then((res) => res.json())
