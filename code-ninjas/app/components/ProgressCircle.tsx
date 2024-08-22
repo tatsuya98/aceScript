@@ -39,10 +39,17 @@ export default function CompositionExample() {
       endAngle={110}
       value={20}
       
+      
     >
       <GaugeReferenceArc
-      />
+      stroke='lightgrey'
+      fill='lightgrey'
+     
+      strokeWidth={4}
+            />
       <GaugeValueArc
+      
+      
       />
       <GaugePointer />
     </GaugeContainer>
