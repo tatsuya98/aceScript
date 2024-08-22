@@ -38,3 +38,27 @@ describe("GET /api/katas", () => {
     });
   });
 });
+describe("POST /api/katas", () => {
+  it("GET 201 : successfully creates kata", async () => {
+    await testApiHandler({
+      appHandler,
+
+      async test({ fetch }) {
+        const data = await fetch({ method: "GET" });
+        const { response } = await data.json();
+        response.forEach((kata: {}) => {
+          expect(kata).toEqual({
+            title: expect.any(String),
+            _id: expect.any(String),
+            slug: expect.any(String),
+            description: expect.any(String),
+            example: expect.any(String),
+            language: expect.any(String),
+            difficulty: expect.any(String),
+            topic: expect.any(String),
+          });
+        });
+      },
+    });
+  });
+});
