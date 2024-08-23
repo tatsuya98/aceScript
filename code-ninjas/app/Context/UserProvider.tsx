@@ -4,7 +4,7 @@ import * as React from "react";
 type User = null | {
   username: string;
   avatar: string;
-  problems_solved: [];
+  problems_solved: string[];
   isLoggedIn: boolean;
 };
 type UserContextType = {
