@@ -29,6 +29,8 @@ export default function OutputBox({value , editorRef , question , handleReset} :
     try {
       setIsLoading(true);
       const { run: result } = await executeCode(sourceCode);
+      setDescription(null)
+      setPassed(false)
       setOutput(result.output.split("\n"));
       result.stderr ? setIsError(true) : setIsError(false);
     } catch (error) {
@@ -69,14 +71,18 @@ export default function OutputBox({value , editorRef , question , handleReset} :
             <Button variant="outlined" onClick={runCode}>RUN CODE</Button>
             <Button variant="outlined" onClick={handleSubmit}>SUBMIT</Button>
             <Box sx={{height:"75%" , border:"1px solid" , borderRadius:"4px" , p:"1rem"}}>
-              <h2 className="font-bold">{passed ? "Passed all tests" : "Failed"}</h2>
+              <h2 className="font-bold">{passed && "Passed all tests"}</h2>
               <br></br>
               <p>{description}</p>
-              <br></br>
+              
               {!passed && 
+              <>
+                <h2>Failed</h2>
+                <br></br>
                 <SyntaxHighlighter language="javascript" style={docco} wrapLongLines={true}>
                   {output}
-               </SyntaxHighlighter>}
+               </SyntaxHighlighter>
+               </>}
             </Box>
         </Box>
     )
