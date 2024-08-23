@@ -25,9 +25,6 @@ const Dashboard: React.FC = () => {
       const data = await fetch("/api/katas").then((res) => res.json());
       const kataData = data.response;
       setProgress(kataData);
-      user?.problems_solved.push("make-counter");
-      user?.problems_solved.push("mean");
-      user?.problems_solved.push("flatten");
     };
     fetchProgress();
   }, []);
