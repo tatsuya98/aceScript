@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useRouter } from 'next/navigation';
 import ProgressCircle from '../components/ProgressCircle';
-import { UserContext } from '../Context/UserProvider'; // Adjust this import path as necessary
+import { UserContext } from '../Context/UserProvider'; 
 
 const UserProfile = () => {
   const { user, setUser } = useContext(UserContext);
