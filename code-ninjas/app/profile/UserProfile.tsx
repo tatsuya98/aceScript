@@ -5,11 +5,11 @@ import ProgressCircle from '../components/ProgressCircle';
 const UserProfile: React.FC = () => {
   const [avatar, setAvatar] = useState<string>('/default-avatar.webp');  
   const [username, setUsername] = useState<string>('Not Logged-in'); 
-  const [problemsSolved, setProblemsSolved] = useState<number[]>([]);
+  const [problemsSolved, setProblemsSolved] = useState<Array<any>>([]); 
   const router = useRouter();
 
   useEffect(() => {
-    fetchUserData(username); // Fetch data for 'Sam' on component mount
+    fetchUserData(username); 
   }, []);
 
   const fetchUserData = async (username: string) => {
@@ -24,8 +24,6 @@ const UserProfile: React.FC = () => {
       console.error('Fetch error:', error);
     }
   };
-
-
   
   
    const handleUpdateImage = async () => {
@@ -105,10 +103,16 @@ const UserProfile: React.FC = () => {
         }}
       />
       <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '10px', color: 'white', }}>{username}</h1>
-      
-      <ProgressCircle/>
-      <p style={{color: 'white', paddingBottom: '20px'}}>2/10 completed</p> 
-
+    
+      <div style={{ 
+        display: 'flex', 
+        flexDirection: 'column', 
+        alignItems: 'center',  
+        width: '100%' 
+      }}>
+       <ProgressCircle completed={problemsSolved.length} total={10} /> 
+       <p style={{color: 'white', paddingBottom: '20px', }}></p> 
+      </div>
       <button
         onClick={handleUpdateImage}
         style={{
