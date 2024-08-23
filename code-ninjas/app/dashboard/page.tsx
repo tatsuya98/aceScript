@@ -1,12 +1,13 @@
 "use client";
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../Context/UserProvider";
-import Link from "next/link";
 
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 interface ResultData {
   title: string;
   slug: string;
-  status: 'completed' | 'incomplete';
+  status: "completed" | "incomplete";
   attempts: number;
   difficulty: "Easy" | "Medium" | "Hard";
 }
@@ -14,18 +15,19 @@ interface ResultData {
 const Dashboard: React.FC = () => {
   const [progress, setProgress] = useState<ResultData[]>([]);
   const { user } = useContext(UserContext);
+  const router = useRouter();
   useEffect(() => {
+    if (!user?.isLoggedIn) {
+      router.push("/login");
+    }
     const fetchProgress = async () => {
-      const data = await fetch('/api/katas').then((res) => res.json())
-      const kataData = data.response
+      const data = await fetch("/api/katas").then((res) => res.json());
+      const kataData = data.response;
       setProgress(kataData);
-
-      // below hardcoded in is problems solved in user array to mark them as complete
-      // shows type error but is working
       user?.problems_solved.push('make-counter')
       user?.problems_solved.push('mean')
       user?.problems_solved.push('flatten')
-
+    };
     };
     fetchProgress();
   }, []);
