@@ -23,7 +23,7 @@ describe("GET /api/users", () => {
       async test({ fetch }) {
         const data = await fetch({ method: "GET" });
         const { response } = await data.json();
-        response.forEach((user: {}) => {
+        response.forEach((user: Record<string, any>) => {
           expect(user).toEqual({
             username: expect.any(String),
             _id: expect.any(String),

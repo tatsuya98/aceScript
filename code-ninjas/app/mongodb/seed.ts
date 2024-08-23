@@ -55,6 +55,12 @@ export default async function seed(userData: any, kataData: any) {
           topic: {
             bsonType: "string",
           },
+          initial_code: {
+            bsonType: "string",
+          },
+          tests: {
+            bsonType: "array",
+          },
         },
         additionalProperties: false,
       },

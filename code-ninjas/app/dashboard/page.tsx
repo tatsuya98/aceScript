@@ -1,7 +1,6 @@
 "use client";
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../Context/UserProvider";
-
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 interface ResultData {
@@ -24,7 +23,6 @@ const Dashboard: React.FC = () => {
       const data = await fetch("/api/katas").then((res) => res.json());
       const kataData = data.response;
       setProgress(kataData);
-
     };
     fetchProgress();
   }, []);
