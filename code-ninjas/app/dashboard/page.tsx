@@ -2,8 +2,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../Context/UserProvider";
 import Link from "next/link";
-
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 interface ResultData {
   title: string;
@@ -83,7 +81,6 @@ const Dashboard: React.FC = () => {
       </table>
     </div>
   );
-
 };
 
 export default Dashboard;
