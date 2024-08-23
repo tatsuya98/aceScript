@@ -1,29 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { useRouter } from 'next/navigation';
 import ProgressCircle from '../components/ProgressCircle';
+import { UserContext } from '../Context/UserProvider'; // Adjust this import path as necessary
 
-const UserProfile: React.FC = () => {
-  const [avatar, setAvatar] = useState<string>('/default-avatar.webp');  
-  const [username, setUsername] = useState<string>('Not Logged-in'); 
-  const [problemsSolved, setProblemsSolved] = useState<Array<any>>([]); 
+const UserProfile = () => {
+  const { user, setUser } = useContext(UserContext);
   const router = useRouter();
-
-  useEffect(() => {
-    fetchUserData(username); 
-  }, []);
-
-  const fetchUserData = async (username: string) => {
-    try {
-      const response = await fetch(`/api/get-user-data?username=${username}`);
-      if (!response.ok) throw new Error('Failed to fetch');
-      const data = await response.json();
-      setAvatar(data.avatar_url || '/default-avatar.webp'); 
-      setUsername(data.username);
-      setProblemsSolved(data.problems_solved);
-    } catch (error) {
-      console.error('Fetch error:', error);
-    }
-  };
   
   
    const handleUpdateImage = async () => {
@@ -93,7 +75,7 @@ const UserProfile: React.FC = () => {
       boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
     }}>
       <img 
-        src={avatar} 
+        src={user?.avatar_url || '/default-avatar.webp'} 
         alt="User Avatar"
         style={{
           width: '200px',
@@ -102,71 +84,30 @@ const UserProfile: React.FC = () => {
           marginBottom: '20px',
         }}
       />
-      <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '10px', color: 'white', }}>{username}</h1>
-    
-      <div style={{ 
-        display: 'flex', 
-        flexDirection: 'column', 
-        alignItems: 'center',  
-        width: '100%' 
-      }}>
-       <ProgressCircle completed={problemsSolved.length} total={10} /> 
-       <p style={{color: 'white', paddingBottom: '20px', }}></p> 
-      </div>
-      <button
-        onClick={handleUpdateImage}
-        style={{
-          padding: '15px 30px',
-          fontSize: '1rem',
-          backgroundColor: '#007BFF',
-          color: 'white',
-          border: 'none',
-          borderRadius: '5px',
-          cursor: 'pointer',
-          marginBottom: '10px',
-          width: '100%',
-        }}
-      >
-        Update Image
-      </button>
-
-      
-      {
-  
-      
-       <button
-        onClick={handleSeeProgress}
-        style={{
-          padding: '15px 30px',
-          fontSize: '1rem',
-          backgroundColor: '#28a745', 
-          color: 'white',
-          border: 'none',
-          borderRadius: '5px',
-          cursor: 'pointer',
-          marginBottom: '10px',
-          width: '100%',
-        }}
-      >
-        See Dashboard
-      </button> }
-
-      <button
-        onClick={handleDeleteProfile}
-        style={{
-          padding: '15px 30px',
-          fontSize: '1rem',
-          backgroundColor: '#FF0000',
-          color: 'white',
-          border: 'none',
-          borderRadius: '5px',
-          cursor: 'pointer',
-          width: '100%',
-        }}
-      >
-        Delete Profile
-      </button>
+      <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '10px', color: 'white' }}>
+        {user ? user.username : 'Not Logged-in'}
+      </h1>
+      <ProgressCircle completed={user?.problems_solved.length || 0} total={10} />
+      <button onClick={handleUpdateImage} style={buttonStyle}>Update Image</button>
+      <button onClick={() => router.push('/dashboard')} style={buttonStyleGreen}>See Dashboard</button>
+      <button onClick={handleDeleteProfile} style={buttonStyleRed}>Delete Profile</button>
     </div>
   );
-}
+};
+
+const buttonStyle = {
+  padding: '15px 30px',
+  fontSize: '1rem',
+  backgroundColor: '#007BFF',
+  color: 'white',
+  border: 'none',
+  borderRadius: '5px',
+  cursor: 'pointer',
+  marginBottom: '10px',
+  width: '100%',
+};
+
+const buttonStyleGreen = { ...buttonStyle, backgroundColor: '#28a745' };
+const buttonStyleRed = { ...buttonStyle, backgroundColor: '#FF0000' };
+
 export default UserProfile;
