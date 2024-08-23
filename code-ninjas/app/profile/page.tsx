@@ -5,15 +5,8 @@ import UserProfile from './UserProfile';
 import UserSolutions from './AcceptedSolutions'; 
 
 
-//placeholder for userssData--->
-const dummyData = {
-  avatar_url: '', //  <-----if empty string defaults to default avatar.
-  username: 'sam',
-  problems_solved: [ 
-    { title: 'Make Counter', difficulty: 'Easy'},
-    { title: 'Mean', difficulty: 'Easy' }
-  ]
-};
+
+
 
 const ProfilePage: React.FC = () => {
   return (
@@ -26,12 +19,12 @@ const ProfilePage: React.FC = () => {
       flexWrap: 'wrap', 
       padding: '0 50px',
     }}>
-      <UserProfile
-        avatarUrl={dummyData.avatar_url}
-        username={dummyData.username}
-      />
+      <UserProfile/>
       <UserSolutions
-        problemsSolved={dummyData.problems_solved}
+        problemsSolved={[ 
+          { title: 'Make Counter', difficulty: 'Easy'},
+          { title: 'Mean', difficulty: 'Easy' }
+        ]}
       />
     </div>
   );
