@@ -30,11 +30,16 @@ export async function removeUser(username: string) {
 
 export async function changeUserDetails(username: string, userDetails: any) {
   await client.connect();
-  const result = await db
-    .collection("users")
-    .updateOne({ username: username }, { $set: userDetails });
-  if (result.modifiedCount === 0) {
-    throw Error;
-  }
+  const result = await db.collection("users").updateOne(
+    { username: username },
+    {
+      $set: {
+        username: userDetails.username,
+        password: userDetails.password,
+        problems_solved: userDetails.problems_solved,
+        avatar_url: userDetails.avatar_url,
+      },
+    }
+  );
   return db.collection("users").findOne({ username: userDetails.username });
 }
