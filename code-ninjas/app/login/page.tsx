@@ -37,9 +37,6 @@ export default function Login(): React.JSX.Element {
           isLoggedIn: true,
         });
         router.push("/dashboard");
-      })
-      .catch((error) => {
-        console.error("Error:", error);
       });
   };
   React.useEffect(() => {

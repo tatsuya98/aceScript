@@ -1,62 +1,86 @@
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation'; 
-import ProgressCircle from '../components/ProgressCircle'
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import ProgressCircle from '../components/ProgressCircle';
 
 const UserProfile: React.FC = () => {
-  const [avatar, setAvatar] = useState<string>('/default-avatar.webp');
-  const username = "JohnDoe"; 
-  const router = useRouter(); 
+  const [avatar, setAvatar] = useState<string>('/default-avatar.webp');  
+  const [username, setUsername] = useState<string>('Not Logged-in'); 
+  const [problemsSolved, setProblemsSolved] = useState<number[]>([]);
+  const router = useRouter();
+
+  useEffect(() => {
+    fetchUserData(username); // Fetch data for 'Sam' on component mount
+  }, []);
+
+  const fetchUserData = async (username: string) => {
+    try {
+      const response = await fetch(`/api/get-user-data?username=${username}`);
+      if (!response.ok) throw new Error('Failed to fetch');
+      const data = await response.json();
+      setAvatar(data.avatar_url || '/default-avatar.webp'); 
+      setUsername(data.username);
+      setProblemsSolved(data.problems_solved);
+    } catch (error) {
+      console.error('Fetch error:', error);
+    }
+  };
+
 
   
   
    const handleUpdateImage = async () => {
 
-    // possible logic to update the profile image--still working on this
-    alert('Update Image clicked');
-    // 
-    //     const file = await selectImageFile(); // Open file picker (not shown)
-    //     const formData = new FormData();
-    //     formData.append('file', file);
-      
-    //     try {
-    //       const response = await fetch('/api/upload-avatar', {
-    //         method: 'POST',
-    //         body: formData,
-    //       });
-    //       const data = await response.json();
-    //       setAvatar(data.imageUrl); 
-    //     } catch (error) {
-    //       console.error('Error updating image:', error);
-    //     }
-    //   };
-      
+
+
+      const filePicker = document.createElement('input');
+      filePicker.type = 'file';
+      filePicker.accept = 'image/*';
+      filePicker.onchange = async (event) => {
+        const file = event.target.files[0];
+        const formData = new FormData();
+        formData.append('file', file);
+    
+        try {
+          const response = await fetch('/api/upload-avatar', {
+            method: 'POST',
+            body: formData,
+          });
+          const data = await response.json();
+          setAvatar(data.imageUrl); 
+        } catch (error) {
+          console.error('Error updating image:', error);
+        }
+      };
+      filePicker.click();
+   }
+    
+    
 
    
-  };
+  
 
-  const handleDeleteProfile = () => {
-    // Logic to delete the profile // async () => {
-    //     try {
-    //       const response = await fetch('/api/delete-profile', {
-    //         method: 'DELETE',
-    //       });
-    //       if (response.ok) {
-    //         alert('Profile deleted');
-    //         router.push('/'); // home page after delete
-    //       } else {
-    //         console.error('Failed to delete profile');
-    //       }
-    //     } catch (error) {
-    //       console.error('Error deleting profile:', error);
-    //     }
-    //   };
-    alert('Delete Profile clicked');
-  };
+  const handleDeleteProfile = async () => {
+        try {
+          const response = await fetch('/api/delete-profile', {
+            method: 'DELETE',
+          });
+          if (response.ok) {
+            alert('Profile deleted');
+            router.push('/'); // home page after delete
+          } else {
+            alert('Error: Failed to delete profile');
+          }
+        } catch (error) {
+          console.error('Error deleting profile:', error);
+        }
+      };
+  //  alert('Delete Profile clicked');
+ 
 
   const handleSeeProgress = () => {
     router.push('/dashboard'); 
   }
-  
+
 
   return (
     <div style={{
@@ -65,8 +89,8 @@ const UserProfile: React.FC = () => {
       alignItems: 'center',
       padding: '50px',
       width: '500px',
-      margin: '0 auto',
-      backgroundColor: '#f9f9f9',
+      margin: '10px',
+      backgroundColor: '#BFDBFE1A',
       borderRadius: '10px',
       boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
     }}>
@@ -80,10 +104,10 @@ const UserProfile: React.FC = () => {
           marginBottom: '20px',
         }}
       />
-      <h1 style={{ fontSize: '2.5rem', marginBottom: '10px', color: 'black', }}>{username}</h1>
+      <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '10px', color: 'white', }}>{username}</h1>
       
       <ProgressCircle/>
-      <p style={{color: 'black', paddingBottom: '20px'}}>2/10 completed</p> 
+      <p style={{color: 'white', paddingBottom: '20px'}}>2/10 completed</p> 
 
       <button
         onClick={handleUpdateImage}
@@ -120,7 +144,7 @@ const UserProfile: React.FC = () => {
           width: '100%',
         }}
       >
-        See Progress
+        See Dashboard
       </button> }
 
       <button
@@ -140,6 +164,5 @@ const UserProfile: React.FC = () => {
       </button>
     </div>
   );
-};
-
+}
 export default UserProfile;

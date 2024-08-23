@@ -29,7 +29,7 @@ export async function createUser(userDetails: any) {
     const fullUserDetails = {
       ...userDetails,
       password: hashedPassword.hash,
-      problems_solved: [],
+      problems_solved: [] as string[],
       avatar_url: "placeholder",
     };
 
