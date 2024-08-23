@@ -21,7 +21,6 @@ export async function GET(
   }
 }
 
-
 export async function DELETE(
   nextRequest: NextRequest,
   { params: { username } }: { params: { username: string } }

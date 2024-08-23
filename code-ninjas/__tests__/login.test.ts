@@ -51,7 +51,7 @@ describe("POST /api/login", () => {
         });
         const message = await response.json();
         expect(response.status).toBe(401);
-        expect(message).toBe("invalid credentials");
+        expect(message).toEqual({ message: "invalid credentials" });
       },
     });
   });
@@ -72,7 +72,7 @@ describe("POST /api/login", () => {
         });
         const message = await response.json();
         expect(response.status).toBe(401);
-        expect(message).toBe("invalid credentials");
+        expect(message).toEqual({ message: "invalid credentials" });
       },
     });
   });
