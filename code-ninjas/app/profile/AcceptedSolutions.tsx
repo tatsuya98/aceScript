@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Link from 'next/link'
+import { UserContext } from '../Context/UserProvider'; 
 
 
 type UserSolutionsProps = {
@@ -9,7 +10,7 @@ type UserSolutionsProps = {
 const UserSolutions: React.FC<UserSolutionsProps> = ({ problemsSolved = [] }) => {
 
   const [localProblemsSolved, setLocalProblemsSolved] = useState(problemsSolved);
-
+  const { user, setUser } = useContext(UserContext);
   
   useEffect(() => {
     setLocalProblemsSolved(problemsSolved);
@@ -28,13 +29,14 @@ const UserSolutions: React.FC<UserSolutionsProps> = ({ problemsSolved = [] }) =>
     }}>
       <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '20px', color: 'white', }}>Your Accepted Solutions</h1>
       {localProblemsSolved.length > 0 ? (
-        localProblemsSolved.map((problem, index) => (
+       user?.problems_solved.map((problem, index) => (
           <p key={index} style={{ fontSize: '1.5rem', color: 'white', paddingBottom: '10px' }}>
-            <Link href={`/problems/${problem.slug}`}
+           {`${index+1}. `}
+            <Link href={`/dashboard/${problem}`}
               style={{ color: '#007BFF', textDecoration: 'underline', cursor: 'pointer' }}>
-                {problem.title}
+                {problem}
              
-            </Link>   {problem.difficulty}
+            </Link>  
           </p>
         ))
       ) : (

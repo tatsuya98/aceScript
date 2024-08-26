@@ -1,11 +1,15 @@
 import {Box, Button , Paper} from "@mui/material"
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { executeCode } from "../utils/piston";
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import patchUser from "../utils/passedTestPatch";
+import { User } from "lucide-react";
+import { UserContext } from "../Context/UserProvider"
+
 
 export default function OutputBox({value , editorRef , question , handleReset} : any){
+  const { user } = useContext(UserContext);
   const [output, setOutput] = useState<any>(null);
   const [description , setDescription] = useState<any>(null)
   const [isLoading, setIsLoading] = useState(false);
@@ -39,31 +43,51 @@ export default function OutputBox({value , editorRef , question , handleReset} :
       setIsLoading(false);
     }
   };
-  	const handleSubmit = () => {
-		let resultsArray: boolean[] = [];
-		let failedTestsArray: test[] = [];
-		let passedTestsArray: test[] = [];
-		tests.forEach((test: any) => {
-			const userCode = new Function(value + `; ${test.testCase};`);
-			const result = userCode();
-      console.log(result)
-			if(result){
-        passedTestsArray.push(test)
+  const handleSubmit = async () => {
+    let resultsArray: boolean[] = [];
+    let failedTestsArray: test[] = [];
+    let passedTestsArray: test[] = [];
+    
+    tests.forEach((test: any) => {
+      const userCode = new Function(value + `; ${test.testCase};`);
+      const result = userCode();
+      console.log(result);
+      if(result){
+        passedTestsArray.push(test);
       } else { 
-        setOutput(test.testCase)
-        setDescription(test.description)
-        setPassed(false) 
-        failedTestsArray.push(test)
-      };
-			resultsArray.push(result);
-		});
-		if(failedTestsArray.length === 0 ){
-      setDescription(null)
-      setOutput(null)
-      setPassed(true)
-      patchUser(question.slug , "gary")
-    };
-	};
+        setOutput(test.testCase);
+        setDescription(test.description);
+        setPassed(false); 
+        failedTestsArray.push(test);
+      }
+      resultsArray.push(result);
+    });
+  
+    if(failedTestsArray.length === 0 ){
+      setDescription(null);
+      setOutput(null);
+      setPassed(true);
+  
+      try {
+  
+        const updatedUser = await patchUser(question.slug, user?.username);
+        
+        if (updatedUser && !updatedUser.error) {
+         
+          setUser(prevUser => ({
+            ...prevUser,
+            problems_solved: updatedUser.data.problems_solved
+          }));
+          alert("Problem solved successfully!");
+        } else {
+          console.error("Failed to update user data:", updatedUser.error);
+        }
+      } catch (error) {
+        console.error("Error updating the user data:", error);
+      }
+    }
+  };
+  
     
     return(
         <Box height="40vh">

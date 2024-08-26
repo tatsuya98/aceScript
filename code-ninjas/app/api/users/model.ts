@@ -30,7 +30,7 @@ export async function createUser(userDetails: any) {
       ...userDetails,
       password: hashedPassword.hash,
       problems_solved: [] as string[],
-      avatar_url: "placeholder",
+      avatar_url: '/default-avatar.webp',
     };
 
     const result = await db.collection("users").insertOne(fullUserDetails);

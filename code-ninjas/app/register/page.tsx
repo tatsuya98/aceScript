@@ -29,7 +29,7 @@ export default function Register() {
         } else {
           setUser({
             username: data.username,
-            avatar: data.avatar_url,
+            avatar: data.avatar_url || '/default-avatar.webp',
             problems_solved: data.problems_solved,
             isLoggedIn: true,
           });
