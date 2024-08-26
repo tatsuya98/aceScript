@@ -147,9 +147,9 @@ const katasData = [
     language: "javaScript",
     difficulty: "Easy",
     topic: "",
-    initiial_code:
+    initial_code:
       "// please dont change the function declaration\nfunction flatten(array) {\n  // your code here\n}",
-      tests: [
+    tests: [
         {
           testCase: `const arr = [1, [2, 3], [4, [5, 6, [7, 8, 9]]], 10];\nconst outcome = flatten(arr);\nreturn outcome.length === 10 && outcome.every((val, index) => val === index + 1);`,
           description: "flatten([1, [2, 3], [4, [5, 6, [7, 8, 9]]], 10]) should return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]",

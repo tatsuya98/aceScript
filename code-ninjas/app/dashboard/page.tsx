@@ -56,7 +56,7 @@ const Dashboard: React.FC = () => {
               className="border-b dark:border-gray-700 bg-[1e2042]"
             >
               <td className="px-6 py-2">
-                <Link href={`/katas/${entry.slug}`}>{entry.title}</Link>
+                <Link href={`/dashboard/${entry.slug}`}>{entry.title}</Link>
               </td>
               <td className="hidden lg:table-cell px-6 py-2">
                 {entry.difficulty}
