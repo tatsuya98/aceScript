@@ -1,38 +1,47 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import ProgressCircle from '../components/ProgressCircle';
 import { UserContext } from '../Context/UserProvider'; 
 
 const UserProfile = () => {
   const { user, setUser } = useContext(UserContext);
+  const [avatarUrl, setAvatarUrl] = useState(user?.avatar || '/default-avatar.webp');
   const router = useRouter();
   
-  
-   const handleUpdateImage = async () => {
+  useEffect(() => {
+    setAvatarUrl(user?.avatar || '/default-avatar.webp');
+    console.log("Avatar URL Updated:", avatarUrl); // Log the current avatar URL
+  }, [user?.avatar]);
 
-
-
-      const filePicker = document.createElement('input');
-      filePicker.type = 'file';
-      filePicker.accept = 'image/*';
-      filePicker.onchange = async (event) => {
-        const file = event.target.files[0];
-        const formData = new FormData();
-        formData.append('file', file);
+  const handleUpdateImage = async () => {
+    const newAvatarUrl = window.prompt("Please enter the new image URL:", avatarUrl);
     
-        try {
-          const response = await fetch('/api/upload-avatar', {
-            method: 'POST',
-            body: formData,
-          });
-          const data = await response.json();
-          setAvatar(data.imageUrl); 
-        } catch (error) {
-          console.error('Error updating image:', error);
+    if (newAvatarUrl && newAvatarUrl !== avatarUrl) {
+      try {
+        const response = await fetch(`/api/users/${user?.username}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ avatar_url: newAvatarUrl }),
+        });
+  
+        const data = await response.json();
+        
+        if (response.ok) {
+          setUser(prevUser => ({ ...prevUser, avatar: newAvatarUrl }));
+          alert('Avatar updated successfully!');
+        } else {
+          throw new Error(data.message || "Failed to update avatar");
         }
-      };
-      filePicker.click();
-   }
+      } catch (error) {
+        console.error('Error updating avatar:', error);
+      }
+    } else {
+      alert('Avatar update canceled or invalid URL provided.');
+    }
+  };
+   
     
     
 
@@ -40,20 +49,28 @@ const UserProfile = () => {
   
 
   const handleDeleteProfile = async () => {
-        try {
-          const response = await fetch('/api/delete-profile', {
+    try {
+        const response = await fetch(`/api/users/${user?.username}`, {
             method: 'DELETE',
-          });
-          if (response.ok) {
+        });
+
+        if (response.ok) {
+            
+            setUser(null);
+
+           
+           
+
             alert('Profile deleted');
-            router.push('/'); // home page after delete
-          } else {
+            router.push('/');
+        } else {
             alert('Error: Failed to delete profile');
-          }
-        } catch (error) {
-          console.error('Error deleting profile:', error);
         }
-      };
+    } catch (error) {
+        console.error('Error deleting profile:', error);
+    }
+};
+
   //  alert('Delete Profile clicked');
  
 
@@ -75,8 +92,9 @@ const UserProfile = () => {
       boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
     }}>
       <img 
-        src={user?.avatar_url || '/default-avatar.webp'} 
+        src={user?.avatar || '/default-avatar.webp'} 
         alt="User Avatar"
+        onError={(e) => { e.target.src = '/default-avatar.webp'; }}
         style={{
           width: '200px',
           height: '200px',

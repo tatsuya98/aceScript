@@ -22,8 +22,8 @@ const ProfilePage: React.FC = () => {
       <UserProfile/>
       <UserSolutions
         problemsSolved={[ 
-          { title: 'Make Counter', difficulty: 'Easy'},
-          { title: 'Mean', difficulty: 'Easy' }
+          { title: 'Make Counter',slug: 'make-counter', difficulty: 'Easy'},
+          { title: 'Mean', slug: 'mean', difficulty: 'Easy' }
         ]}
       />
     </div>

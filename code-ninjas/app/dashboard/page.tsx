@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../Context/UserProvider";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+
 interface ResultData {
   title: string;
   slug: string;
@@ -13,19 +14,43 @@ interface ResultData {
 
 const Dashboard: React.FC = () => {
   const [progress, setProgress] = useState<ResultData[]>([]);
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    if (!user?.isLoggedIn) {
-      router.push("/login");
-    }
-    const fetchProgress = async () => {
-      const data = await fetch("/api/katas").then((res) => res.json());
-      const kataData = data.response;
-      setProgress(kataData);
+    const fetchData = async () => {
+      if (!user?.isLoggedIn) {
+        router.push("/login");
+        return;
+      }
+
+      try {
+        
+        const userResponse = await fetch(`/api/users/${user.username}`);
+        const updatedUser = await userResponse.json();
+
+      
+        setUser(updatedUser);
+
+      
+        const kataResponse = await fetch("/api/katas");
+        const kataData = await kataResponse.json();
+
+        setProgress(kataData.response);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Failed to fetch data:", error);
+        setIsLoading(false);
+      }
     };
-    fetchProgress();
-  }, []);
+
+    fetchData();
+  }, [user?.username, setUser, router]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div
@@ -56,7 +81,7 @@ const Dashboard: React.FC = () => {
               className="border-b dark:border-gray-700 bg-[1e2042]"
             >
               <td className="px-6 py-2">
-                <Link href={`/katas/${entry.slug}`}>{entry.title}</Link>
+                <Link href={`/dashboard/${entry.slug}`}>{entry.title}</Link>
               </td>
               <td className="hidden lg:table-cell px-6 py-2">
                 {entry.difficulty}
