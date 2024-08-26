@@ -61,12 +61,12 @@ export default function OutputBox({
       }
       resultsArray.push(result);
     });
-    if (failedTestsArray.length === 0) {
+    if (failedTestsArray.length === 0 && user) {
       setDescription(null);
       setOutput(null);
       setPassed(true);
-      patchUser(question.slug, user?.username);
-      user?.problems_solved.push(question.slug);
+      patchUser(question.slug, user.username);
+      user.problems_solved.push(question.slug);
       setUser(user);
     }
   };
