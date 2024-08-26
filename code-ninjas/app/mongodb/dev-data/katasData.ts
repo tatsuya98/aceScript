@@ -147,6 +147,43 @@ const katasData = [
     language: "javaScript",
     difficulty: "Easy",
     topic: "",
+    initial_code:
+      "// please dont change the function declaration\nfunction flatten(array) {\n  // your code here\n}",
+    tests: [
+        {
+          testCase: `const arr = [1, [2, 3], [4, [5, 6, [7, 8, 9]]], 10];\nconst outcome = flatten(arr);\nreturn outcome.length === 10 && outcome.every((val, index) => val === index + 1);`,
+          description: "flatten([1, [2, 3], [4, [5, 6, [7, 8, 9]]], 10]) should return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]",
+        },
+        {
+          testCase: `const arr = []; \nconst outcome = flatten(arr);\nreturn outcome.length === 0;`,
+          description: "flatten([]) should return an empty array []",
+        },
+        {
+          testCase: `const arr = [1, 2, 3];\nconst outcome = flatten(arr);\nreturn outcome.length === 3 && outcome[0] === 1 && outcome[1] === 2 && outcome[2] === 3;`,
+          description: "flatten([1, 2, 3]) should return [1, 2, 3] (no nested arrays)",
+        },
+        {
+          testCase: `const arr = [[1, 2], [3, 4], [5, 6]];\nconst outcome = flatten(arr);\nreturn outcome.length === 6 && outcome.every((val, index) => val === index + 1);`,
+          description: "flatten([[1, 2], [3, 4], [5, 6]]) should return [1, 2, 3, 4, 5, 6]",
+        },
+        {
+          testCase: `const arr = [1, [2, [3, [4, [5]]]]];\nconst outcome = flatten(arr);\nreturn outcome.length === 5 && outcome.every((val, index) => val === index + 1);`,
+          description: "flatten([1, [2, [3, [4, [5]]]]]) should return [1, 2, 3, 4, 5] (deeply nested array)",
+        },
+        {
+          testCase: `const arr = [[], [[], []], [[], [[], []]]];\nconst outcome = flatten(arr);\nreturn outcome.length === 0;`,
+          description: "flatten([[], [[], []], [[], [[], []]]]) should return an empty array [] (all empty nested arrays)",
+        },
+        {
+          testCase: `const arr = [[1], 2, [3, [4]], 5];\nconst outcome = flatten(arr);\nreturn outcome.length === 5 && outcome.every((val, index) => val === index + 1);`,
+          description: "flatten([[1], 2, [3, [4]], 5]) should return [1, 2, 3, 4, 5]",
+        },
+        {
+          testCase: `const arr = [1, [[[[2, 3], 4], 5], 6], 7];\nconst outcome = flatten(arr);\nreturn outcome.length === 7 && outcome.every((val, index) => val === index + 1);`,
+          description: "flatten([1, [[[[2, 3], 4], 5], 6], 7]) should return [1, 2, 3, 4, 5, 6, 7]",
+        },
+      ]
+      
   },
   {
     title: "Multiples of 3 or 5",
@@ -159,7 +196,7 @@ const katasData = [
     difficulty: "Medium",
     topic: "",
     initial_code:
-      "/ please dont change the function declaration\nfunction sumOfMultples(number) {\n  // Your code here\n}",
+      "// please dont change the function declaration\nfunction sumOfMultples(number) {\n  // Your code here\n}",
     tests: [
       {
         testCase: `const outcome = solution(10);\nreturn outcome === 23;`,
@@ -312,6 +349,39 @@ const katasData = [
     language: "javaScript",
     difficulty: "Medium",
     topic: "",
+    initial_code:
+      "// please dont change the function declaration\nfunction snail(array) {\n  // your code here\n}",
+    tests: [
+      {
+        testCase: `const array = [[1,2,3], [4,5,6], [7,8,9]];\nconst outcome = snail(array);\nreturn Array.isArray(outcome) && outcome.length === 9 && outcome.every((val, index) => val === [1,2,3,6,9,8,7,4,5][index]);`,
+        description: "snail([[1,2,3], [4,5,6], [7,8,9]]) should return [1, 2, 3, 6, 9, 8, 7, 4, 5]",
+      },
+      {
+        testCase: `const array = [[1,2,3], [8,9,4], [7,6,5]];\nconst outcome = snail(array);\nreturn Array.isArray(outcome) && outcome.length === 9 && outcome.every((val, index) => val === [1,2,3,4,5,6,7,8,9][index]);`,
+        description: "snail([[1,2,3], [8,9,4], [7,6,5]]) should return [1, 2, 3, 4, 5, 6, 7, 8, 9]",
+      },
+      {
+        testCase: `const array = [[1]];\nconst outcome = snail(array);\nreturn Array.isArray(outcome) && outcome.length === 1 && outcome[0] === 1;`,
+        description: "snail([[1]]) should return [1] (1x1 array)",
+      },
+      {
+        testCase: `const array = [[1, 2], [4, 3]];\nconst outcome = snail(array);\nreturn Array.isArray(outcome) && outcome.length === 4 && outcome.every((val, index) => val === [1,2,3,4][index]);`,
+        description: "snail([[1, 2], [4, 3]]) should return [1, 2, 3, 4] (2x2 array)",
+      },
+      {
+        testCase: `const array = [[1,2,3,4], [12,13,14,5], [11,16,15,6], [10,9,8,7]];\nconst outcome = snail(array);\nreturn Array.isArray(outcome) && outcome.length === 16 && outcome.every((val, index) => val === [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16][index]);`,
+        description: "snail([[1,2,3,4], [12,13,14,5], [11,16,15,6], [10,9,8,7]]) should return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] (4x4 array)",
+      },
+      {
+        testCase: `const array = [[1, 2, 3, 4, 5], [16, 17, 18, 19, 6], [15, 24, 25, 20, 7], [14, 23, 22, 21, 8], [13, 12, 11, 10, 9]];\nconst outcome = snail(array);\nreturn Array.isArray(outcome) && outcome.length === 25 && outcome.every((val, index) => val === [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25][index]);`,
+        description: "snail([[1, 2, 3, 4, 5], [16, 17, 18, 19, 6], [15, 24, 25, 20, 7], [14, 23, 22, 21, 8], [13, 12, 11, 10, 9]]) should return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25] (5x5 array)",
+      },
+      {
+        testCase: `const array = [[]];\nconst outcome = snail(array);\nreturn Array.isArray(outcome) && outcome.length === 0;`,
+        description: "snail([[]]) should return an empty array [] (empty input)",
+      },
+    ]
+    
   },
   {
     title: "Pallindrome Counter",
@@ -323,6 +393,55 @@ const katasData = [
     language: "javaScript",
     difficulty: "Hard",
     topic: "",
+    initial_code:
+      "// please dont change the function declaration\nfunction counter(a, b) {\n  // your code here\n}",
+      tests: [
+        {
+          testCase: `const outcome = counter(6, 11);\nreturn outcome === 5;`,
+          description: "counter(6, 11) should return 5 because there are 5 palindromes: 6, 7, 8, 9, 11",
+        },
+        {
+          testCase: `const outcome = counter(150, 250);\nreturn outcome === 10;`,
+          description: "counter(150, 250) should return 10 because there are 10 palindromes: 151, 161, 171, 181, 191, 202, 212, 222, 232, 242",
+        },
+        {
+          testCase: `const outcome = counter(0, 0);\nreturn outcome === 1;`,
+          description: "counter(0, 0) should return 1 because 0 is a palindrome",
+        },
+        {
+          testCase: `const outcome = counter(1, 9);\nreturn outcome === 9;`,
+          description: "counter(1, 9) should return 9 because all single-digit numbers are palindromes: 1, 2, 3, 4, 5, 6, 7, 8, 9",
+        },
+        {
+          testCase: `const outcome = counter(10, 20);\nreturn outcome === 1;`,
+          description: "counter(10, 20) should return 1 because there is only 1 palindrome: 11",
+        },
+        {
+          testCase: `const outcome = counter(100, 200);\nreturn outcome === 9;`,
+          description: "counter(100, 200) should return 9 because there are 9 palindromes: 101, 111, 121, 131, 141, 151, 161, 171, 181, 191",
+        },
+        {
+          testCase: `const outcome = counter(1, 1000);\nreturn outcome === 108;`,
+          description: "counter(1, 1000) should return 108 because there are 108 palindromes in this range",
+        },
+        {
+          testCase: `const outcome = counter(200, 300);\nreturn outcome === 9;`,
+          description: "counter(200, 300) should return 9 because there are 9 palindromes: 202, 212, 222, 232, 242, 252, 262, 272, 282",
+        },
+        {
+          testCase: `const outcome = counter(100, 100);\nreturn outcome === 0;`,
+          description: "counter(100, 100) should return 0 because 100 is not a palindrome",
+        },
+        {
+          testCase: `const outcome = counter(1, 10);\nreturn outcome === 9;`,
+          description: "counter(1, 10) should return 9 because all single-digit numbers (1 to 9) are palindromes",
+        },
+        {
+          testCase: `const outcome = counter(500, 600);\nreturn outcome === 0;`,
+          description: "counter(500, 600) should return 0 because there are no palindromes between 500 and 600",
+        }
+      ]
+      
   },
   {
     title: "Bake Cakes",
@@ -334,7 +453,53 @@ const katasData = [
     language: "javaScript",
     difficulty: "Hard",
     topic: "",
+    initial_code:
+      "//please dont change the function declaration\nfunction cakes(recipe, available) {\n  // Your code here\n}",
+      tests: [
+        {
+          testCase: `const recipe = {flour: 500, sugar: 200, eggs: 1};\nconst ingredients = {flour: 1200, sugar: 1200, eggs: 5, milk: 200};\nconst outcome = cakes(recipe, ingredients);\nreturn outcome === 2;`,
+          description: "cakes({flour: 500, sugar: 200, eggs: 1}, {flour: 1200, sugar: 1200, eggs: 5, milk: 200}) should return 2",
+        },
+        {
+          testCase: `const recipe = {apples: 3, flour: 300, sugar: 150, milk: 100, oil: 100};\nconst ingredients = {sugar: 500, flour: 2000, milk: 2000};\nconst outcome = cakes(recipe, ingredients);\nreturn outcome === 0;`,
+          description: "cakes({apples: 3, flour: 300, sugar: 150, milk: 100, oil: 100}, {sugar: 500, flour: 2000, milk: 2000}) should return 0 (missing ingredients: apples, oil)",
+        },
+        {
+          testCase: `const recipe = {flour: 300, sugar: 150, milk: 100};\nconst ingredients = {flour: 600, sugar: 300, milk: 200};\nconst outcome = cakes(recipe, ingredients);\nreturn outcome === 2;`,
+          description: "cakes({flour: 300, sugar: 150, milk: 100}, {flour: 600, sugar: 300, milk: 200}) should return 2",
+        },
+        {
+          testCase: `const recipe = {flour: 400, sugar: 150, milk: 100};\nconst ingredients = {flour: 800, sugar: 450, milk: 200};\nconst outcome = cakes(recipe, ingredients);\nreturn outcome === 2;`,
+          description: "cakes({flour: 400, sugar: 150, milk: 100}, {flour: 800, sugar: 450, milk: 200}) should return 2",
+        },
+        {
+          testCase: `const recipe = {eggs: 2, sugar: 100};\nconst ingredients = {eggs: 6, sugar: 450};\nconst outcome = cakes(recipe, ingredients);\nreturn outcome === 3;`,
+          description: "cakes({eggs: 2, sugar: 100}, {eggs: 6, sugar: 450}) should return 3",
+        },
+        {
+          testCase: `const recipe = {flour: 500, sugar: 200, eggs: 1};\nconst ingredients = {flour: 500, sugar: 200, eggs: 1};\nconst outcome = cakes(recipe, ingredients);\nreturn outcome === 1;`,
+          description: "cakes({flour: 500, sugar: 200, eggs: 1}, {flour: 500, sugar: 200, eggs: 1}) should return 1",
+        },
+        {
+          testCase: `const recipe = {flour: 300, sugar: 200};\nconst ingredients = {flour: 100, sugar: 200};\nconst outcome = cakes(recipe, ingredients);\nreturn outcome === 0;`,
+          description: "cakes({flour: 300, sugar: 200}, {flour: 100, sugar: 200}) should return 0 (not enough flour)",
+        },
+        {
+          testCase: `const recipe = {butter: 200, sugar: 100};\nconst ingredients = {butter: 400, sugar: 500};\nconst outcome = cakes(recipe, ingredients);\nreturn outcome === 2;`,
+          description: "cakes({butter: 200, sugar: 100}, {butter: 400, sugar: 500}) should return 2",
+        },
+        {
+          testCase: `const recipe = {flour: 300, sugar: 150, eggs: 2};\nconst ingredients = {flour: 600, sugar: 150, eggs: 4};\nconst outcome = cakes(recipe, ingredients);\nreturn outcome === 2;`,
+          description: "cakes({flour: 300, sugar: 150, eggs: 2}, {flour: 600, sugar: 150, eggs: 4}) should return 2",
+        },
+        {
+          testCase: `const recipe = {milk: 1};\nconst ingredients = {};\nconst outcome = cakes(recipe, ingredients);\nreturn outcome === 0;`,
+          description: "cakes({milk: 1}, {}) should return 0 (missing milk)",
+        }
+      ]
+      
   },
 ];
+
 
 export default katasData;
