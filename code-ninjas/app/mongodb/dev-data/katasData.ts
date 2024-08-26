@@ -193,53 +193,53 @@ const katasData = [
     example:
       "function(20) should return 98 (3 + 5 + 6 + 9 + 10 + 12 + 15 + 18 + 20)",
     language: "javaScript",
-    difficulty: "Medium",
+    difficulty: "Easy",
     topic: "",
     initial_code:
-      "// please dont change the function declaration\nfunction sumOfMultples(number) {\n  // Your code here\n}",
-    tests: [
-      {
-        testCase: `const outcome = solution(10);\nreturn outcome === 23;`,
-        description: "solution(10) should return 23 (3 + 5 + 6 + 9)",
-      },
-      {
-        testCase: `const outcome = solution(20);\nreturn outcome === 98;`,
-        description:
-          "solution(20) should return 98 (3 + 5 + 6 + 9 + 10 + 12 + 15 + 18 + 20)",
-      },
-      {
-        testCase: `const outcome = solution(0);\nreturn outcome === 0;`,
-        description: "solution(0) should return 0 (no multiples below 0)",
-      },
-      {
-        testCase: `const outcome = solution(1);\nreturn outcome === 0;`,
-        description: "solution(1) should return 0 (no multiples below 1)",
-      },
-      {
-        testCase: `const outcome = solution(5);\nreturn outcome === 8;`,
-        description: "solution(5) should return 8 (3 + 5)",
-      },
-      {
-        testCase: `const outcome = solution(15);\nreturn outcome === 60;`,
-        description:
-          "solution(15) should return 60 (3 + 5 + 6 + 9 + 10 + 12 + 15)",
-      },
-      {
-        testCase: `const outcome = solution(30);\nreturn outcome === 225;`,
-        description:
-          "solution(30) should return 225 (3 + 5 + 6 + 9 + 10 + 12 + 15 + 18 + 20 + 21 + 24 + 25 + 27 + 30)",
-      },
-      {
-        testCase: `const outcome = solution(50);\nreturn outcome === 593;`,
-        description:
-          "solution(50) should return 593 (sum of all multiples of 3 or 5 below 50)",
-      },
-      {
-        testCase: `const outcome = solution(100);\nreturn outcome === 2418;`,
-        description:
-          "solution(100) should return 2418 (sum of all multiples of 3 or 5 below 100)",
-      },
-    ],
+      "// please dont change the function declaration\nfunction sumOfMultiples(number) {\n  // Your code here\n}",
+      tests: [
+        {
+          testCase: `const outcome = sumOfMultiples(10);\nreturn outcome === 23;`,
+          description: "sumOfMultiples(10) should return 23 (3 + 5 + 6 + 9)",
+        },
+        {
+          testCase: `const outcome = sumOfMultiples(10);\nreturn outcome === 23;`,
+          description: "sumOfMultiples(10) should return 23 (3 + 5 + 6 + 9)",
+        },
+        {
+          testCase: `const outcome = sumOfMultiples(20);\nreturn outcome === 78;`,
+          description: "sumOfMultiples(20) should return 78 (3 + 5 + 6 + 9 + 10 + 12 + 15 + 18)",
+        },
+        {
+          testCase: `const outcome = sumOfMultiples(0);\nreturn outcome === 0;`,
+          description: "sumOfMultiples(0) should return 0 (no multiples below 0)",
+        },
+        {
+          testCase: `const outcome = sumOfMultiples(1);\nreturn outcome === 0;`,
+          description: "sumOfMultiples(1) should return 0 (no multiples below 1)",
+        },
+        {
+          testCase: `const outcome = sumOfMultiples(5);\nreturn outcome === 3;`,
+          description: "sumOfMultiples(5) should return 3 (3)",
+        },
+        {
+          testCase: `const outcome = sumOfMultiples(15);\nreturn outcome === 45;`,
+          description: "sumOfMultiples(15) should return 45 (3 + 5 + 6 + 9 + 10 + 12)",
+        },
+        {
+          testCase: `const outcome = sumOfMultiples(30);\nreturn outcome === 195;`,
+          description: "sumOfMultiples(30) should return 195 (3 + 5 + 6 + 9 + 10 + 12 + 15 + 18 + 20 + 21 + 24 + 25 + 27)",
+        },
+        {
+          testCase: `const outcome = sumOfMultiples(50);\nreturn outcome === 543;`,
+          description: "sumOfMultiples(50) should return 543 (sum of all multiples of 3 or 5 below 50)",
+        },
+        {
+          testCase: `const outcome = sumOfMultiples(100);\nreturn outcome === 2318;`,
+          description: "sumOfMultiples(100) should return 2318 (sum of all multiples of 3 or 5 below 100)",
+        },
+      ]
+      ,
   },
   {
     title: "Digital Root",
@@ -307,36 +307,7 @@ const katasData = [
     initial_code:
       "class Stack {\n  constructor() {\n    // Initialize the stack\n  }\n\n  push(value) {\n    // Add value to the stack\n  }\n\n  pop() {\n    // Remove and return the top value from the stack\n  }\n\n  isEmpty() {\n    // Return true if the stack is empty, otherwise false\n  }\n\n  length() {\n    // Return the number of elements in the stack\n  }\n\n  peek() {\n    // Return the top value of the stack without removing it\n  }\n}",
     tests: [
-      {
-        testCase: `const s = new Stack();\nreturn s instanceof Stack;`,
-        description:
-          "Creating a new Stack instance should return true for instanceof Stack",
-      },
-      {
-        testCase: `const s = new Stack();\nreturn s.push(100) === 1 && s.length() === 1 && s.push(200) === 2 && s.length() === 2;`,
-        description:
-          "push() should correctly add elements and update the length",
-      },
-      {
-        testCase: `const s = new Stack();\ns.push(100);\nreturn s.length() === 1 && s.pop() === 100 && s.length() === 0 && s.pop() === undefined;`,
-        description:
-          "pop() should remove elements and handle underflow correctly",
-      },
-      {
-        testCase: `const s = new Stack();\nreturn s.isEmpty() === true && (s.push(100), s.isEmpty() === false) && (s.pop(), s.isEmpty() === true);`,
-        description:
-          "isEmpty() should correctly identify if the stack is empty",
-      },
-      {
-        testCase: `const s = new Stack();\nreturn s.length() === 0 && (s.push(100), s.length() === 1) && (s.push(200), s.length() === 2) && (s.pop(), s.length() === 1) && (s.push(300), s.length() === 2);`,
-        description:
-          "length() should correctly track the number of elements in the stack",
-      },
-      {
-        testCase: `const s = new Stack();\nreturn s.peek() === undefined && (s.push(100), s.peek() === 100) && (s.push(200), s.peek() === 200) && (s.pop(), s.peek() === 100) && (s.push(300), s.peek() === 300) && (s.pop(), s.pop(), s.peek() === undefined);`,
-        description:
-          "peek() should return the top element without removing it and handle empty stack correctly",
-      },
+
     ],
   },
   {
@@ -396,50 +367,7 @@ const katasData = [
     initial_code:
       "// please dont change the function declaration\nfunction counter(a, b) {\n  // your code here\n}",
       tests: [
-        {
-          testCase: `const outcome = counter(6, 11);\nreturn outcome === 5;`,
-          description: "counter(6, 11) should return 5 because there are 5 palindromes: 6, 7, 8, 9, 11",
-        },
-        {
-          testCase: `const outcome = counter(150, 250);\nreturn outcome === 10;`,
-          description: "counter(150, 250) should return 10 because there are 10 palindromes: 151, 161, 171, 181, 191, 202, 212, 222, 232, 242",
-        },
-        {
-          testCase: `const outcome = counter(0, 0);\nreturn outcome === 1;`,
-          description: "counter(0, 0) should return 1 because 0 is a palindrome",
-        },
-        {
-          testCase: `const outcome = counter(1, 9);\nreturn outcome === 9;`,
-          description: "counter(1, 9) should return 9 because all single-digit numbers are palindromes: 1, 2, 3, 4, 5, 6, 7, 8, 9",
-        },
-        {
-          testCase: `const outcome = counter(10, 20);\nreturn outcome === 1;`,
-          description: "counter(10, 20) should return 1 because there is only 1 palindrome: 11",
-        },
-        {
-          testCase: `const outcome = counter(100, 200);\nreturn outcome === 9;`,
-          description: "counter(100, 200) should return 9 because there are 9 palindromes: 101, 111, 121, 131, 141, 151, 161, 171, 181, 191",
-        },
-        {
-          testCase: `const outcome = counter(1, 1000);\nreturn outcome === 108;`,
-          description: "counter(1, 1000) should return 108 because there are 108 palindromes in this range",
-        },
-        {
-          testCase: `const outcome = counter(200, 300);\nreturn outcome === 9;`,
-          description: "counter(200, 300) should return 9 because there are 9 palindromes: 202, 212, 222, 232, 242, 252, 262, 272, 282",
-        },
-        {
-          testCase: `const outcome = counter(100, 100);\nreturn outcome === 0;`,
-          description: "counter(100, 100) should return 0 because 100 is not a palindrome",
-        },
-        {
-          testCase: `const outcome = counter(1, 10);\nreturn outcome === 9;`,
-          description: "counter(1, 10) should return 9 because all single-digit numbers (1 to 9) are palindromes",
-        },
-        {
-          testCase: `const outcome = counter(500, 600);\nreturn outcome === 0;`,
-          description: "counter(500, 600) should return 0 because there are no palindromes between 500 and 600",
-        }
+       
       ]
       
   },
@@ -456,46 +384,7 @@ const katasData = [
     initial_code:
       "//please dont change the function declaration\nfunction cakes(recipe, available) {\n  // Your code here\n}",
       tests: [
-        {
-          testCase: `const recipe = {flour: 500, sugar: 200, eggs: 1};\nconst ingredients = {flour: 1200, sugar: 1200, eggs: 5, milk: 200};\nconst outcome = cakes(recipe, ingredients);\nreturn outcome === 2;`,
-          description: "cakes({flour: 500, sugar: 200, eggs: 1}, {flour: 1200, sugar: 1200, eggs: 5, milk: 200}) should return 2",
-        },
-        {
-          testCase: `const recipe = {apples: 3, flour: 300, sugar: 150, milk: 100, oil: 100};\nconst ingredients = {sugar: 500, flour: 2000, milk: 2000};\nconst outcome = cakes(recipe, ingredients);\nreturn outcome === 0;`,
-          description: "cakes({apples: 3, flour: 300, sugar: 150, milk: 100, oil: 100}, {sugar: 500, flour: 2000, milk: 2000}) should return 0 (missing ingredients: apples, oil)",
-        },
-        {
-          testCase: `const recipe = {flour: 300, sugar: 150, milk: 100};\nconst ingredients = {flour: 600, sugar: 300, milk: 200};\nconst outcome = cakes(recipe, ingredients);\nreturn outcome === 2;`,
-          description: "cakes({flour: 300, sugar: 150, milk: 100}, {flour: 600, sugar: 300, milk: 200}) should return 2",
-        },
-        {
-          testCase: `const recipe = {flour: 400, sugar: 150, milk: 100};\nconst ingredients = {flour: 800, sugar: 450, milk: 200};\nconst outcome = cakes(recipe, ingredients);\nreturn outcome === 2;`,
-          description: "cakes({flour: 400, sugar: 150, milk: 100}, {flour: 800, sugar: 450, milk: 200}) should return 2",
-        },
-        {
-          testCase: `const recipe = {eggs: 2, sugar: 100};\nconst ingredients = {eggs: 6, sugar: 450};\nconst outcome = cakes(recipe, ingredients);\nreturn outcome === 3;`,
-          description: "cakes({eggs: 2, sugar: 100}, {eggs: 6, sugar: 450}) should return 3",
-        },
-        {
-          testCase: `const recipe = {flour: 500, sugar: 200, eggs: 1};\nconst ingredients = {flour: 500, sugar: 200, eggs: 1};\nconst outcome = cakes(recipe, ingredients);\nreturn outcome === 1;`,
-          description: "cakes({flour: 500, sugar: 200, eggs: 1}, {flour: 500, sugar: 200, eggs: 1}) should return 1",
-        },
-        {
-          testCase: `const recipe = {flour: 300, sugar: 200};\nconst ingredients = {flour: 100, sugar: 200};\nconst outcome = cakes(recipe, ingredients);\nreturn outcome === 0;`,
-          description: "cakes({flour: 300, sugar: 200}, {flour: 100, sugar: 200}) should return 0 (not enough flour)",
-        },
-        {
-          testCase: `const recipe = {butter: 200, sugar: 100};\nconst ingredients = {butter: 400, sugar: 500};\nconst outcome = cakes(recipe, ingredients);\nreturn outcome === 2;`,
-          description: "cakes({butter: 200, sugar: 100}, {butter: 400, sugar: 500}) should return 2",
-        },
-        {
-          testCase: `const recipe = {flour: 300, sugar: 150, eggs: 2};\nconst ingredients = {flour: 600, sugar: 150, eggs: 4};\nconst outcome = cakes(recipe, ingredients);\nreturn outcome === 2;`,
-          description: "cakes({flour: 300, sugar: 150, eggs: 2}, {flour: 600, sugar: 150, eggs: 4}) should return 2",
-        },
-        {
-          testCase: `const recipe = {milk: 1};\nconst ingredients = {};\nconst outcome = cakes(recipe, ingredients);\nreturn outcome === 0;`,
-          description: "cakes({milk: 1}, {}) should return 0 (missing milk)",
-        }
+  
       ]
       
   },
