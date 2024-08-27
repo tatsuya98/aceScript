@@ -1,106 +1,116 @@
 "use client";
 import CodeEditor from "@/app/components/CodeEditor";
+import React, { useState, useEffect, useContext } from 'react';
+import { Box, Typography } from '@mui/material';
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { UserContext } from "../../Context/UserProvider";
+import { useRouter } from "next/navigation";
 
-
+interface Question {
+  _id?: string;
+  title?: string;
+  slug?: string;
+  description?: string;
+  example?: string;
+  language?: string;
+  difficulty?: string;
+  topic?: string;
+  tests: [];
+  initial_code: string;
+}
 
 export default function Page() {
-	interface Question {
-		_id?: string;
-		title?: string;
-		slug?: string;
-		description?: string;
-		example?: string;
-		language?: string;
-		difficulty?: string;
-		topic?: string;
-		tests: [];
-		initial_code: string;
-	}
+  const { user } = useContext(UserContext);
+  const router = useRouter();
+  const { slug } = useParams();
+  const [question, setQuestion] = useState<Question>({
+    tests: [],
+    initial_code: '',
+  });
 
-	const { slug } = useParams();
-	const [question, setQuestion] = useState<Question>({
-		tests: [],
-		initial_code: "",
-	});
+  useEffect(() => {
+	if (!user?.isLoggedIn) {
+		router.push("/login");
+	  }
+    const path = `/api/katas/${slug}`;
+    fetch(path)
+      .then((response) => response.json())
+      .then((data: Question) => {
+        setQuestion(data);
+      });
+  }, [slug]);
 
-	const [tests, setTests] = useState<any>([]);
-	
-
-
-	useEffect(() => {
-		const path = `/api/katas/${slug}`;
-		fetch(path)
-			.then((response) => response.json())
-			.then((data: Question) => {
-				console.log(data);
-				setQuestion(data);
-				setTests(data.tests);
-				// setStarterCode(data.initial_code);
-			});
-	}, []);
-
-;
-
-
-	// const handleSubmit = () => {
-	// 	let resultsArray: boolean[] = [];
-	// 	let failedTestsArray: test[] = [];
-	// 	let passedTestsArray: test[] = [];
-	// 	tests.forEach((test: any) => {
-	// 		console.log(test);
-	// 		const userCode = new Function(value + `; ${test.testCase};`);
-	// 		const result = userCode();
-	// 		result ? passedTestsArray.push(test) : failedTestsArray.push(test);
-	// 		resultsArray.push(result);
-	// 	});
-	// 	setFailedTests(failedTestsArray);
-	// 	setPassedTests(passedTestsArray);
-	// 	if (resultsArray.includes(false)) setOutcome("failed");
-	// 	else setOutcome("passed");
-	// };
-
-	return (
-		<section className="flex px-10 mt-20 ">
-			<div className="w-1/2 flex flex-col gap-5">
-				<h1>{question.title}</h1>
-				<p>{question.difficulty}</p>
-				<p>{question.topic}</p>
-				<p>{question.description}</p>
-				<div className="flex flex-col gap-3">
-					<p>Example</p>
-					<code>{question.example}</code>
-				</div>
-			</div>
-			<div className="flex w-1/2 flex-col gap-5">
-			<CodeEditor question={question}/>
-			</div>
-
-				{/* <p>outcome : {outcome}</p>
-				<div>
-					<h2>Failed Tests</h2>
-
-					{failedTests.length > 0
-						? failedTests.map((test) => (
-								<>
-									<p>{test.testCase}</p>
-									<p>{test.description}</p>
-								</>
-						  ))
-						: null}
-				</div>
-				<div>
-					<h2>Passed Tests</h2>
-					{passedTests.length > 0
-						? passedTests.map((test) => (
-								<>
-									<p>{test.testCase}</p>
-									<p>{test.description}</p>
-								</>
-						  ))
-						: null}
-				</div> */}
-		</section>
-	);
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'row',
+        p: 3,
+        bgcolor: '#070815',
+        color: '#E0E0E0',
+        minHeight: '100vh',
+        gap: 3,
+      }}
+    >
+      <Box
+        sx={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 2,
+        }}
+      >
+        <Typography variant="h3" sx={{ color: '#E0E0E0' }}>
+          {question.title}
+        </Typography>
+        <Typography variant="body1" sx={{ color: '#B0B0B0' }}>
+          Difficulty: {question.difficulty}
+        </Typography>
+        {/* <Typography variant="body1" sx={{ color: '#B0B0B0' }}>
+          Topic: {question.topic}
+        </Typography> */}
+        <Typography variant="body1" sx={{ color: '#E0E0E0' }}>
+          {question.description}
+        </Typography>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 1,
+            mt: 2,
+            p: 2,
+            bgcolor: '#1E1E1E',
+            borderRadius: 1,
+          }}
+        >
+          <Typography variant="body1" sx={{ color: '#E0E0E0' }}>
+            Example
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{
+              bgcolor: '#2C2C2C',
+              borderRadius: 1,
+              p: 1,
+              color: '#E0E0E0',
+              fontFamily: 'monospace',
+            }}
+          >
+            {question.example}
+          </Typography>
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 3,
+        }}
+      >
+        <CodeEditor question={question} />
+      </Box>
+    </Box>
+  );
 }
+
