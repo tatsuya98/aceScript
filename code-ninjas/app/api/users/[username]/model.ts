@@ -2,10 +2,12 @@ import { client, db } from "../../../mongodb/connection";
 import { handleNotFound } from "../../utils/errorHandler";
 import { passwordLoginAttempt } from "../../utils/utils";
 
-export async function fetchUser(username: String) {
+
+
+export async function fetchUser(username: string) {
   await client.connect();
   try {
-    const user = await db.collection("users").findOne({ username: username });
+    const user = await db.collection("users").findOne({ username });
     return user;
   } catch (error: any) {
     throw error;
@@ -19,7 +21,7 @@ export async function removeUser(username: string) {
   try {
     const deleteSuccess = await db
       .collection("users")
-      .deleteOne({ username: username });
+      .deleteOne({ username });
     return deleteSuccess;
   } catch (error: any) {
     throw error;
@@ -30,16 +32,23 @@ export async function removeUser(username: string) {
 
 export async function changeUserDetails(username: string, userDetails: any) {
   await client.connect();
-  const result = await db.collection("users").updateOne(
+
+ 
+  const { _id, ...updateFields } = userDetails;
+
+  const updateResult = await db.collection("users").updateOne(
     { username: username },
     {
-      $set: {
-        username: userDetails.username,
-        password: userDetails.password,
-        problems_solved: userDetails.problems_solved,
-        avatar_url: userDetails.avatar_url,
-      },
+      $set: updateFields, 
     }
   );
+
+  console.log("Update result:", updateResult);
+
+  if (updateResult.matchedCount === 0) {
+    return { error: "No user found with the given username" };
+  }
+
   return db.collection("users").findOne({ username: userDetails.username });
 }
+
