@@ -182,6 +182,10 @@ const katasData = [
           testCase: `const arr = [1, [[[[2, 3], 4], 5], 6], 7];\nconst outcome = flatten(arr);\nreturn outcome.length === 7 && outcome.every((val, index) => val === index + 1);`,
           description: "flatten([1, [[[[2, 3], 4], 5], 6], 7]) should return [1, 2, 3, 4, 5, 6, 7]",
         },
+        {
+          testCase: `const arr = [7, [[[[6, 5], 4], 3], 2], 1];\nconst outcome = flatten(arr);\nreturn outcome.length === 7 && outcome.every((val, index) => val === 7 - index);`,
+          description: "flatten([7, [[[[6, 5], 4], 3], 2], 1]) should return [7, 6, 5, 4, 3, 2, 1]",
+        },
       ]
       
   },
@@ -198,10 +202,6 @@ const katasData = [
     initial_code:
       "// please dont change the function declaration\nfunction sumOfMultiples(number) {\n  // Your code here\n}",
       tests: [
-        {
-          testCase: `const outcome = sumOfMultiples(10);\nreturn outcome === 23;`,
-          description: "sumOfMultiples(10) should return 23 (3 + 5 + 6 + 9)",
-        },
         {
           testCase: `const outcome = sumOfMultiples(10);\nreturn outcome === 23;`,
           description: "sumOfMultiples(10) should return 23 (3 + 5 + 6 + 9)",
@@ -298,7 +298,7 @@ const katasData = [
     title: "Create Stack",
     slug: "create-stack",
     description:
-      "implement a data structure in javascript that contains the following operations.\n - push(value)\n - pop()\n - peek()\n - isEmpty()\n\nThe stack should be a class with methods `push`, `pop`, `peek` and `isEmpty`",
+      "implement a data structure in javascript that contains the following operations.\n - push(value) // add an element to the top of the stack\n - pop() // remove and return the element from the top of the stack\n - peek() // return the element from the top of the stack\n - isEmpty() // return true if the stack is empty\n\nThe stack should be a class with methods `push`, `pop`, `peek` and `isEmpty`",
     example:
       "const stack = new Stack(); \nstack.push(1); \nstack.push(2); \nstack.push(3); \nstack.peek(); // 3\nstack.pop(); //3\nstack.peek(); // 2\n stack.isEmpty(); // false",
     language: "javaScript",
@@ -307,7 +307,85 @@ const katasData = [
     initial_code:
       "class Stack {\n  constructor() {\n    // Initialize the stack\n  }\n\n  push(value) {\n    // Add value to the stack\n  }\n\n  pop() {\n    // Remove and return the top value from the stack\n  }\n\n  isEmpty() {\n    // Return true if the stack is empty, otherwise false\n  }\n\n  length() {\n    // Return the number of elements in the stack\n  }\n\n  peek() {\n    // Return the top value of the stack without removing it\n  }\n}",
     tests: [
-
+{
+  testCase: `
+    const stack = new Stack();
+    stack.push(1);
+    stack.push(2);
+    stack.push(3);
+    const peekResult = stack.peek();
+    const popResult = stack.pop();
+    return peekResult === 3 && popResult === 3 && stack.peek() === 2;
+  `,
+  description: "Basic operations: push, peek, and pop should work correctly. After pushing 1, 2, and 3, peek should return 3, pop should return 3, and subsequent peek should return 2."
+},
+{
+  testCase: `
+    const stack = new Stack();
+    stack.push(1);
+    stack.push(2);
+    stack.push(3);
+    stack.pop();
+    stack.pop();
+    stack.pop();
+    return stack.isEmpty();
+  `,
+  description: "After pushing 1, 2, and 3, and popping all elements, isEmpty should return true."
+},
+{
+  testCase: `
+    const stack = new Stack();
+    return stack.pop() === undefined;
+  `,
+  description: "Popping from an empty stack should return undefined."
+},
+{
+  testCase: `
+    const stack = new Stack();
+    return stack.peek() === undefined;
+  `,
+  description: "Peeking into an empty stack should return undefined."
+},
+{
+  testCase: `
+    const stack = new Stack();
+    stack.push(42);
+    return !stack.isEmpty() && stack.peek() === 42;
+  `,
+  description: "After pushing an element, isEmpty should return false and peek should return the pushed element."
+},
+{
+  testCase: `
+    const stack = new Stack();
+    stack.push(10);
+    stack.push(20);
+    const firstPop = stack.pop();
+    const secondPop = stack.pop();
+    return firstPop === 20 && secondPop === 10 && stack.isEmpty();
+  `,
+  description: "After pushing 10 and 20, popping twice should return 20 and 10, and the stack should be empty."
+},
+{
+  testCase: `
+    const stack = new Stack();
+    stack.push(5);
+    stack.pop();
+    stack.push(10);
+    stack.pop();
+    return stack.isEmpty();
+  `,
+  description: "Repeated push and pop should leave the stack empty."
+},
+{
+  testCase: `
+    const stack = new Stack();
+    stack.push(1);
+    stack.push(2);
+    stack.push(3);
+    return stack.pop() === 3 && stack.pop() === 2 && stack.pop() === 1 && stack.isEmpty();
+  `,
+  description: "Pushing 1, 2, 3 and then popping all should return them in reverse order, leaving the stack empty."
+}
     ],
   },
   {
@@ -367,7 +445,42 @@ const katasData = [
     initial_code:
       "// please dont change the function declaration\nfunction counter(a, b) {\n  // your code here\n}",
       tests: [
-       
+        {
+          testCase: `const outcome = counter(6, 11);\nreturn outcome === 5;`,
+          description: "counter(6, 11) should return 5",
+        },
+        {
+          testCase: `const outcome = counter(4, 110);\nreturn outcome === 16;`,
+          description: "counter(4, 110) should return 16",
+        },
+        {
+          testCase: `const outcome = counter(100, 500);\nreturn outcome === 40;`,
+          description: "counter(100, 500) should return 40",
+        },
+        {
+          testCase: `const outcome = counter(1002, 2001);\nreturn outcome === 9;`,
+          description: "counter(1002, 2001) should return 9",
+        },
+        {
+          testCase: `const outcome = counter(1984, 2024);\nreturn outcome === 2;`,
+          description: "counter(1984, 2024) should return 2",
+        },
+        {
+          testCase: `const outcome = counter(9999, 1000000);\nreturn outcome === 1801;`,
+          description: "counter(9999, 1000000) should return 1801",
+        },
+        {
+          testCase: `const outcome = counter(57, 75);\nreturn outcome === 1;`,
+          description: "counter(57, 75) should return 1",
+        },
+        {
+          testCase: `const outcome = counter(1003, 1093);\nreturn outcome === 0;`,
+          description: "counter(1003, 1093) should return 0",
+        },
+        {
+          testCase: `const outcome = counter(5698, 8965);\nreturn outcome === 32;`,
+          description: "counter(5698, 8965) should return 32",
+        },
       ]
       
   },
@@ -377,14 +490,50 @@ const katasData = [
     description:
       "You like to bake cakes. You have some recipes and ingredients. Write a function to quickly find out, if you have enough ingredients to bake a cake and how many of them.\n\nWrite a function `cakes()`, which takes the recipe (object) and the available ingredients (also an object) and returns the maximum number of cakes you can bake (integer). For simplicity there are no units for the amounts (e.g. 1 lb of flour or 200 g of sugar are simply 1 or 200). Ingredients that are not present in the objects, can be considered as 0.",
     example:
-      "// must return 2\ncakes({flour: 500, sugar: 200, eggs: 1}, {flour: 1200, sugar: 1200, eggs: 5, milk: 200}); \n// must return 0\ncakes({apples: 3, flour: 300, sugar: 150, milk: 100, oil: 100}, {sugar: 500, flour: 2000, milk: 2000});",
+      "cakes({flour: 500, sugar: 200, eggs: 1}, {flour: 1200, sugar: 1200, eggs: 5, milk: 200}); // must return 2\ncakes({apples: 3, flour: 300, sugar: 150, milk: 100, oil: 100}, {sugar: 500, flour: 2000, milk: 2000}); // must return 0\n",
     language: "javaScript",
     difficulty: "Hard",
     topic: "",
     initial_code:
       "//please dont change the function declaration\nfunction cakes(recipe, available) {\n  // Your code here\n}",
       tests: [
-  
+        {
+          testCase: `const recipe = {flour: 200, sugar: 120, eggs: 5};\nconst available = {flour: 300, sugar: 150, eggs: 1};\nconst outcome = cakes(recipe, available);\nreturn outcome === 0;`,
+          description: "cakes({flour: 200, sugar: 120, eggs: 5}, {flour: 300, sugar: 150, eggs: 1}) should return 0",
+        },
+        {
+          testCase: `const recipe = {butter: 200, bananas: 2, eggs: 1, flour: 300, sugar: 200};\nconst available = {butter: 500, flour: 2000, sugar: 1500, milk: 1000, bananas: 6, eggs: 5, apples: 3};\nconst outcome = cakes(recipe, available);\n return outcome === 2;`,
+          description: " cakes({butter: 200, bananas: 2, eggs: 1, flour: 300, sugar: 200}, {butter: 500, flour: 2000, sugar: 1500, milk: 1000, bananas: 6, eggs: 5, apples: 3}) should return 2",
+        },
+        {
+          testCase: `const recipe = {butter: 200, bananas: 2, eggs: 1, flour: 300, sugar: 200};\nconst available = {butter: 500, flour: 2000, sugar: 1500, milk: 1000, bananas: 2, eggs: 5, apples: 3};\nconst outcome = cakes(recipe, available);\n return outcome === 1;`,
+          description: "cakes({butter: 200, bananas: 2, eggs: 1, flour: 300, sugar: 200}, {butter: 500, flour: 2000, sugar: 1500, milk: 1000, bananas: 2, eggs: 5, apples: 3}) should return 1",
+        },
+        {
+          testCase: `const recipe = {carrots: 3, sultanas: 100, flour: 265, eggs: 4, walnuts: 100};\nconst available = {carrots: 14, sultanas: 500, pecans: 500, eggs: 24, flour: 1200, walnuts: 1000, yogurt: 1000};\nconst outcome = cakes(recipe, available);\n return outcome === 4;`,
+          description: "cakes({carrots: 3, sultanas: 100, flour: 265, eggs: 4, walnuts: 100}, {carrots: 14, sultanas: 500, pecans: 500, eggs: 24, flour: 1200, walnuts: 1000, yogurt: 1000}) should return 4",
+        },
+        {
+          testCase: `const recipe = {flour: 250, sugar: 100, eggs: 3};\nconst available = {flour: 1000, sugar: 500, eggs: 10};\nconst outcome = cakes(recipe, available);\nreturn outcome === 3;`,
+          description: "cakes({flour: 250, sugar: 100, eggs: 3}, {flour: 1000, sugar: 500, eggs: 10}) should return 3",
+        },
+        {
+          testCase: `const recipe = {apples: 4, cinnamon: 1, sugar: 100};\nconst available = {apples: 4, cinnamon: 1, flour: 500};\nconst outcome = cakes(recipe, available);\nreturn outcome === 0;`,
+          description: "cakes({apples: 4, cinnamon: 1, sugar: 100}, {apples: 4, cinnamon: 1, flour: 500}) should return 0 (missing sugar)",
+        },
+        {
+          testCase: `const recipe = {chocolate: 200, cream: 100};\nconst available = {chocolate: 400, cream: 300, sugar: 150};\nconst outcome = cakes(recipe, available);\nreturn outcome === 2;`,
+          description: "cakes({chocolate: 200, cream: 100}, {chocolate: 400, cream: 300, sugar: 150}) should return 2",
+        },
+        {
+          testCase: `const recipe = {flour: 300, sugar: 150, eggs: 2};\nconst available = {flour: 1500, sugar: 600};\nconst outcome = cakes(recipe, available);\nreturn outcome === 0;`,
+          description: "cakes({flour: 300, sugar: 150, eggs: 2}, {flour: 1500, sugar: 600}) should return 0 (missing eggs)",
+        },
+        {
+          testCase: `const recipe = {butter: 100, chocolate: 200, flour: 100};\nconst available = {butter: 500, chocolate: 800, flour: 400};\nconst outcome = cakes(recipe, available);\nreturn outcome === 4;`,
+          description: "cakes({butter: 100, chocolate: 200, flour: 100}, {butter: 500, chocolate: 800, flour: 400}) should return 4",
+        }
+
       ]
       
   },
