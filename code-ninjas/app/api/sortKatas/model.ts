@@ -1,21 +1,29 @@
 import { client, db } from "../../mongodb/connection";
+import { sortData } from "../utils/utils";
 
-export async function fetchKatasBySort(sort: string) {
+export async function fetchKatasBySort(
+  sort: string,
+  problems_solved?: string[]
+) {
   await client.connect();
-  if (sort === "very hard") {
-    const order = ["very hard", "hard", "medium", "easy", "very easy"];
-    const m = { $match: { difficulty: { $in: order } } };
-    const a = {
-      $addFields: { __order: { $indexOfArray: [order, "$difficulty"] } },
-    };
-    const p = { $project: { __order: 0 } };
-    const s = { $sort: { __order: 1 } };
-    const result = await db
-      .collection("katas")
-      .aggregate([m, a, s, p])
-      .toArray();
-    return result;
-  } else {
-    return await db.collection("katas").find().toArray();
+  let order = [];
+  let column_name;
+  switch (sort) {
+    case "Easy":
+      order = ["Easy", "Medium", "Hard"];
+      column_name = "difficulty";
+      return await sortData(db, order, column_name);
+    case "Hard":
+      order = ["Hard", "Medium", "Easy"];
+      column_name = "difficulty";
+      return await sortData(db, order, column_name);
+    case "Completed":
+      column_name = "slug";
+      return await sortData(db, problems_solved, column_name);
+    case "Incomplete":
+      column_name = "slug";
+      const slug = "Incomplete";
+      return await sortData(db, problems_solved, column_name, slug);
+    default:
   }
 }
