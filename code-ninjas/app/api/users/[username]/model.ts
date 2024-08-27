@@ -32,32 +32,23 @@ export async function removeUser(username: string) {
 
 export async function changeUserDetails(username: string, userDetails: any) {
   await client.connect();
-  try {
-      const updateResult = await db.collection("users").updateOne(
-          { username: username },
-          { $set: userDetails }
-      );
-      console.log("Update result:", updateResult);
 
-      if (updateResult.matchedCount === 0) {
-          console.log("No user found with username:", username);
-          return { error: "No user found with given username", status: 404 };
-      } else if (updateResult.modifiedCount === 0) {
-          console.log("No changes made to the user details:", username);
-          return { error: "No changes made", status: 304 };
-      }
+ 
+  const { _id, ...updateFields } = userDetails;
 
-      const updatedUser = await db.collection("users").findOne({ username: username });
-      if (!updatedUser) {
-          console.log("Failed to retrieve updated details for username:", username);
-          return { error: "Failed to retrieve user after update", status: 500 };
-      }
-      return { data: updatedUser, status: 200 };
-  } catch (error) {
-      console.error("Error updating user details:", error);
-      if (error.code === 121) {
-          return { error: "Document failed validation", details: error.errmsg, status: 400 };
-      }
-      return { error: "Internal server error", status: 500 };
+  const updateResult = await db.collection("users").updateOne(
+    { username: username },
+    {
+      $set: updateFields, 
+    }
+  );
+
+  console.log("Update result:", updateResult);
+
+  if (updateResult.matchedCount === 0) {
+    return { error: "No user found with the given username" };
   }
+
+  return db.collection("users").findOne({ username: userDetails.username });
 }
+
