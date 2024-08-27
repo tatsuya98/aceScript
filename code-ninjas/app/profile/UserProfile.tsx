@@ -63,51 +63,25 @@ const UserProfile = () => {
 
 
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      padding: '50px',
-      width: '500px',
-      margin: '10px',
-      backgroundColor: '#BFDBFE1A',
-      borderRadius: '10px',
-      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-    }}>
+    <div className="flex flex-col items-center p-12 w-[500px]  bg-opacity-10 bg-blue-200 rounded-lg shadow-lg">
       <img 
         src={user?.avatar_url || '/default-avatar.webp'} 
         alt="User Avatar"
-        style={{
-          width: '200px',
-          height: '200px',
-          borderRadius: '50%',
-          marginBottom: '20px',
-        }}
+        className="w-48 h-48 rounded-full mb-5"
       />
-      <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '10px', color: 'white' }}>
+      <h1 className="text-4xl font-bold mb-2.5 text-white">
         {user ? user.username : 'Not Logged-in'}
       </h1>
       <ProgressCircle completed={user?.problems_solved.length || 0} total={10} />
-      <button onClick={handleUpdateImage} style={buttonStyle}>Update Image</button>
-      <button onClick={() => router.push('/dashboard')} style={buttonStyleGreen}>See Dashboard</button>
-      <button onClick={handleDeleteProfile} style={buttonStyleRed}>Delete Profile</button>
+      <button onClick={handleUpdateImage} className={buttonStyle}>Update Image</button>
+      <button onClick={() => router.push('/dashboard')} className={buttonStyleGreen}>See Dashboard</button>
+      <button onClick={handleDeleteProfile} className={buttonStyleRed}>Delete Profile</button>
     </div>
   );
 };
 
-const buttonStyle = {
-  padding: '15px 30px',
-  fontSize: '1rem',
-  backgroundColor: '#007BFF',
-  color: 'white',
-  border: 'none',
-  borderRadius: '5px',
-  cursor: 'pointer',
-  marginBottom: '10px',
-  width: '100%',
-};
-
-const buttonStyleGreen = { ...buttonStyle, backgroundColor: '#28a745' };
-const buttonStyleRed = { ...buttonStyle, backgroundColor: '#FF0000' };
+const buttonStyle = "py-3 px-6 text-lg bg-blue-500 text-white rounded cursor-pointer mb-2.5 w-full";
+const buttonStyleGreen = `${buttonStyle} bg-green-500`;
+const buttonStyleRed = `${buttonStyle} bg-red-500`;
 
 export default UserProfile;

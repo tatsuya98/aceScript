@@ -16,29 +16,19 @@ const UserSolutions: React.FC<UserSolutionsProps> = ({ problemsSolved = [] }) =>
   }, [problemsSolved]);
 
   return (
-    <div style={{
-      padding: '50px',
-      width: '400px',
-    
-      minHeight: '860px',
-      backgroundColor: '#BFDBFE1A',
-      borderRadius: '10px',
-     
-    
-    }}>
-      <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '20px', color: 'white', }}>Your Accepted Solutions</h1>
+    <div className="p-12 w-[400px] min-h-[910px] bg-[#BFDBFE1A] rounded-lg">
+      <h1 className="text-2xl font-bold mb-5 text-white">Your Accepted Solutions</h1>
       {localProblemsSolved.length > 0 ? (
         localProblemsSolved.map((problem, index) => (
-          <p key={index} style={{ fontSize: '1.5rem', color: 'white', paddingBottom: '10px' }}>
-            <Link href={`/problems/${problem.slug}`}
-              style={{ color: '#007BFF', textDecoration: 'underline', cursor: 'pointer' }}>
-                {problem.title}
-             
-            </Link>   {problem.difficulty}
+          <p key={index} className="text-xl text-white mb-2">
+            <Link href={`/problems/${problem.title}`} className="text-blue-500 underline">
+              {problem.title}
+            </Link>
+            {" "}{problem.status}
           </p>
         ))
       ) : (
-        <p style={{ fontSize: '1.2rem', color: 'gray' }}>No solutions found.</p>
+        <p className="text-lg text-gray-500">No solutions found.</p>
       )}
     </div>
   );
