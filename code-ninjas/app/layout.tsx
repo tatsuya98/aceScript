@@ -20,7 +20,7 @@ export default function RootLayout({
 				<UserContextProvider>
 					<Header />
 					<main className="flex-1">{children}</main>
-					<Footer />
+					{/* <Footer /> */}
 				</UserContextProvider>
 			</body>
 		</html>

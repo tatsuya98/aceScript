@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Code from "../icons/Code";
+import Code from "../../icons/Code";
 import Code2 from "../icons/ray-so-export (2).png";
 import Image from "next/image";
 export default function Hero() {
