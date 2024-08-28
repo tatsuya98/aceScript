@@ -24,7 +24,7 @@ export default function FormInput({
     setShowPassword(!showPassword);
   };
   const checkInput = (input: string, setFn: (value: boolean) => void): void => {
-    if (input.length < 6) {
+    if (input.length < 1) {
       setFn(true);
     }
   };
