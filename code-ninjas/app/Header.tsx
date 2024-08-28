@@ -9,22 +9,15 @@ import ProfileDropDown from "./components/profileDropDown";
 import Image from "next/image";
 import MobileMenu from "./HomeComponents/MobileMenu";
 
-
 export default function Header() {
   const [showSideMenu, setShowSideMenu] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
-  const [burgerIcon, setBurgerIcon] = useState(false);
   const [mobileWidth, setMobileWidth] = useState(window.innerWidth);
   const { user } = useContext(UserContext);
   const handleMenuToggle = () => {
     setShowSideMenu(!showSideMenu);
   };
   const handleResize = () => {
-    if (window.innerWidth <= 640) {
-      setBurgerIcon(true);
-    } else {
-      setBurgerIcon(false);
-    }
     setMobileWidth(window.innerWidth);
   };
   useEffect(() => {
@@ -40,13 +33,17 @@ export default function Header() {
     };
   }, [user?.isLoggedIn, mobileWidth]);
 
-
   return (
     <>
       <header className="flex justify-between h-20 items-center px-6 max-w-7xl m-auto fixed top-0 right-0 left-0 bg-[#070815] z-10">
-      	<Link href="/" className="w-[150px]">
-					<Image src='/logo.png' alt="Code Ninjas Logo" width={70} height={70} />
-				</Link>
+        <Link href="/" className="w-[150px]">
+          <Image
+            src="/logo.png"
+            alt="Code Ninjas Logo"
+            width={70}
+            height={70}
+          />
+        </Link>
         <button onClick={handleMenuToggle} className="sm:hidden">
           <Hamburger />
         </button>
