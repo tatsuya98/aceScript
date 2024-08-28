@@ -7,7 +7,7 @@ import Account from "./icons/Account";
 import { UserContext } from "./Context/UserProvider";
 import ProfileDropDown from "./components/profileDropDown";
 import Image from "next/image";
-import MobileMenu from "./HomeComponents/MobileMenu";
+import MobileMenu from "./components/HomeComponents/MobileMenu";
 export default function Header() {
   const [showSideMenu, setShowSideMenu] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
