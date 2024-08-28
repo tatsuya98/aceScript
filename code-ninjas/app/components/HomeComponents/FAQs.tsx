@@ -7,7 +7,7 @@ import {
 
 export default function FAQs() {
 	return (
-		<section className="w-[90%] m-auto max-w-4xl mt-32 flex flex-col gap-6">
+		<section className="w-[90%] m-auto max-w-4xl mt-32 flex flex-col gap-6 mb-40">
 			<h3 className="text-center font-semibold text-4xl">FAQs</h3>
 			<Accordion
 				type="single"
