@@ -24,7 +24,7 @@ export default function KataCard({
   return (
     <div className="flex bg-#070815 border-solid  border-2 border-gray-400 text-white p-10 gap-10 rounded-lg mt-5 m-auto max-w-5xl min-w-[300px]">
       <div className="flex flex-col gap-10 ">
-        <Link className="w-fit" href={`/katas/${slug}`}>
+        <Link className="w-fit" href={`/dashboard/${slug}`}>
           <Image
             src="/jsIconSmall.png"
             alt="programming language icon"
@@ -36,7 +36,7 @@ export default function KataCard({
       </div>
 
       <div className="flex flex-col gap-10 ">
-        <Link className="w-fit" href={`/katas/${slug}`}>
+        <Link className="w-fit" href={`/dashboard/${slug}`}>
           <h1 className="text-white font-bold">{title}</h1>
         </Link>
         <p className="text-white">{description}</p>
