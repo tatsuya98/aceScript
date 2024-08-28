@@ -41,18 +41,17 @@ export async function PATCH(
     try {
       userDetails = await nextRequest.json();
     } catch (parseError) {
-      console.error("Error parsing JSON:", parseError);
+     
       return NextResponse.json({ message: "Invalid JSON data provided" }, { status: 400 });
     }
 
-    console.log(`Received username: ${username}`);
-    console.log(`User details received for update:`, userDetails);
+
 
     const response = await changeUserDetails(username, userDetails);
-    console.log(`Change details response:`, response);
+  
     return NextResponse.json(response, { status: 202 });
   } catch (error) {
-    console.error(`Error in PATCH operation for username ${username}:`, error);
+ 
     return NextResponse.json({ message: "Internal server error", details: error }, { status: 500 });
   }
 }

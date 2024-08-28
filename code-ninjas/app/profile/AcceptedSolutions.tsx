@@ -15,7 +15,7 @@ const UserSolutions: React.FC<UserSolutionsProps> = ({ problemsSolved = [] }) =>
   }, [problemsSolved]);
 
   return (
-    <div className="p-12 w-[400px] min-h-[910px] bg-[#BFDBFE1A] rounded-lg">
+    <div className="p-12 w-[400px] min-h-[910px] bg-[#BFDBFE1A] rounded-lg border border-white">
       <h1 className="text-2xl font-bold mb-5 text-white">Your Accepted Solutions</h1>
       {user?.problems_solved?.length > 0 ? (
         user.problems_solved.map((problem, index) => (
