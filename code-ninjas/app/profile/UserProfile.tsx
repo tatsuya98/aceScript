@@ -10,7 +10,7 @@ const UserProfile = () => {
   
   useEffect(() => {
     setAvatarUrl(user?.avatar || '/default-avatar.webp');
-    console.log("Avatar URL Updated:", avatarUrl); 
+ 
   }, [user?.avatar]);
 
   const handleUpdateImage = async () => {
@@ -69,7 +69,7 @@ const UserProfile = () => {
     }
 };
 
-  //  alert('Delete Profile clicked');
+ 
  
 
   const handleSeeProgress = () => {
