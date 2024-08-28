@@ -35,13 +35,13 @@ export const sortData = async (
       (kata: any) => !order?.includes(kata.slug)
     );
     duplicateKatas.push(...result);
-    duplicateKatas.forEach((obj) => {
+    duplicateKatas.forEach((obj: { slug: string | number }) => {
       uniqueObjects[obj.slug] = obj;
     });
   } else {
     result = await db.collection("katas").aggregate([m, a, s, p]).toArray();
     result.push(...duplicateKatas);
-    result.forEach((obj) => {
+    result.forEach((obj: { slug: string | number }) => {
       uniqueObjects[obj.slug] = obj;
     });
   }
