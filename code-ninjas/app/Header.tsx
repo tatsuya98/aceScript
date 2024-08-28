@@ -44,9 +44,18 @@ export default function Header() {
   return (
     <>
       <header className="flex justify-between h-20 items-center px-6 max-w-7xl m-auto fixed top-0 right-0 left-0 bg-[#070815] z-10">
-      	<Link href="/" className="w-[150px]">
-					<Image src='/logo.png' alt="Code Ninjas Logo" width={70} height={70} />
-				</Link>
+      <div className=" flex justify-center relative w-1/4 h-full">
+        <Link href="/" >
+          <Image 
+            src='/logo8.png' 
+            alt="Code Ninjas Logo" 
+            className="w-1/2 h-1/2 m-2" 
+            fill={true}
+            style={{ cursor: 'pointer' }}
+          />
+        </Link>
+      </div>
+      	
         <button onClick={handleMenuToggle} className="sm:hidden">
           <Hamburger />
         </button>
