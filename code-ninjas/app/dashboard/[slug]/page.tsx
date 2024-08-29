@@ -52,7 +52,7 @@ export default function Page() {
 		fetchQuestion(path);
 	}, [slug]);
 
-	if (loading === true) {
+	if (loading) {
 		return (
 			<Box sx={{marginTop: '200px'}} >
 				<LinearProgress />
