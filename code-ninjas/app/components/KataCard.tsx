@@ -22,7 +22,7 @@ export default function KataCard({
 }: cardProps) {
   const { user } = useContext(UserContext);
   return (
-    <div className="flex bg-#070815 border-solid  border-2 border-gray-400 text-white p-10 gap-10 rounded-lg mt-5 m-auto max-w-5xl min-w-[300px]">
+    <div className="flex bg-#070815 border-solid  border-2 border-gray-400 text-white p-10 gap-10 rounded-lg mt-5 m-auto max-w-[850px] min-w-[300px]">
       <div className="flex flex-col gap-10 ">
         <Link className="w-fit" href={`/dashboard/${slug}`}>
           <Image
