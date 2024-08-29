@@ -34,7 +34,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="flex justify-between h-30 items-center px-6 max-w-7xl m-auto fixed top-0 right-0 left-0 bg-[#070815] z-20">
+      <header className="flex justify-between h-30 items-center px-6 py-6 max-w-7xl m-auto fixed top-0 right-0 left-0 bg-[#070815] z-20">
         <div className=" flex justify-center relative h-full">
           <Link href="/">
             <Image
