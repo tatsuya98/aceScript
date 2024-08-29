@@ -61,13 +61,7 @@ export default function Page() {
       </Box>
     );
   }
-        if (loading) {
-		return (
-			<Box sx={{marginTop: '200px'}} >
-				<LinearProgress />
-			</Box>
-		);
-	}
+      
   return (
     <>
       <Box
