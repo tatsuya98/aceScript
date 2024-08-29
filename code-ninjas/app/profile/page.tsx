@@ -10,20 +10,12 @@ import UserSolutions from './AcceptedSolutions';
 
 const ProfilePage: React.FC = () => {
   return (
-    <div style={{
-      display: 'flex', 
-      justifyContent: 'center', 
-      alignItems: 'flex-start',
-      marginTop: '50px',
-      gap: '20px',
-      flexWrap: 'wrap', 
-      padding: '0 50px',
-    }}>
-      <UserProfile/>
+    <div className="flex justify-center items-start mt-12 gap-5 flex-wrap px-12">
+      <UserProfile />
       <UserSolutions
-        problemsSolved={[ 
-          { title: 'Make Counter', difficulty: 'Easy'},
-          { title: 'Mean', difficulty: 'Easy' }
+        problemsSolved={[
+          { title: 'Make Counter', status: 'Easy' },
+          { title: 'Mean', status: 'Easy' },
         ]}
       />
     </div>
