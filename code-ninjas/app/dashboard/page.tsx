@@ -1,13 +1,12 @@
 "use client";
 import React, { useContext, useEffect, useState } from "react";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
 import { UserContext } from "../Context/UserProvider";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import SortByOptions from "../components/SortByOptions";
 import KataCard from "../components/KataCard";
+import { Box} from "@mui/material";
+import LinearProgress from "@mui/material/LinearProgress";
 interface ResultData {
   title: string;
   slug: string;
@@ -22,6 +21,7 @@ const Dashboard: React.FC = () => {
   const { user } = useContext(UserContext);
   const router = useRouter();
   const [sortBy, setSortBy] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false)
   useEffect(() => {
     if (!user?.isLoggedIn) {
       alert("Please login first");
@@ -44,13 +44,26 @@ const Dashboard: React.FC = () => {
         });
     } else {
       const fetchProgress = async () => {
-        const data = await fetch("/api/katas").then((res) => res.json());
-        const kataData = data.response;
-        setProgress(kataData);
+        try{
+          setLoading(true)
+          const data = await fetch("/api/katas").then((res) => res.json());
+          const kataData = data.response;
+          setProgress(kataData);
+        } finally {
+          setLoading(false)
+        }
       };
       fetchProgress();
     }
   }, [sortBy]);
+
+  if (loading) {
+		return (
+			<Box sx={{marginTop: '200px'}} >
+				<LinearProgress />
+			</Box>
+		);
+	}
 
   return (
     <div
