@@ -1,178 +1,95 @@
 "use client";
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../Context/UserProvider";
-
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import SortByOptions from "../components/SortByOptions";
+import KataCard from "../components/KataCard";
+import { Box } from "@mui/material";
+import LinearProgress from "@mui/material/LinearProgress";
 interface ResultData {
   title: string;
   slug: string;
-  status: 'completed' | 'incomplete';
+  status: "completed" | "incomplete";
   attempts: number;
-
-  difficulty: "Easy" | "Medium" | "Hard";
+  difficulty: string;
+  description: string;
 }
 
 const Dashboard: React.FC = () => {
   const [progress, setProgress] = useState<ResultData[]>([]);
   const { user } = useContext(UserContext);
+  const router = useRouter();
+  const [sortBy, setSortBy] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
   useEffect(() => {
-    const fetchProgress = async () => {
-      const data = await fetch('/api/katas').then((res) => res.json())
-      const kataData = data.response
-      setProgress(kataData);
+    if (!user?.isLoggedIn) {
+      alert("Please login first");
+      router.push("/login");
+    }
+    if (sortBy.length > 0) {
+      fetch("/api/sortKatas", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          sort_by: sortBy,
+          problems_solved: user?.problems_solved,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setProgress(data.response);
+        });
+    } else {
+      const fetchProgress = async () => {
+        try {
+          setLoading(true);
+          const data = await fetch("/api/katas").then((res) => res.json());
+          const kataData = data.response;
+          setProgress(kataData);
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchProgress();
+    }
+  }, [sortBy]);
 
-    };
-
-    fetchProgress();
-  }, []);
-
-  // const handleQuestionClick = (questionId: string) => {
-  //   router.push(`/questions/${questionId}`);
-  // };
+  if (loading) {
+    return (
+      <Box sx={{ marginTop: "200px" }}>
+        <LinearProgress />
+      </Box>
+    );
+  }
 
   return (
     <div
-      style={{
-        padding: "20px",
-        width: "1200px",
-        margin: "0 auto",
-        background: "black",
-      }}
+      className={
+        "flex flex-col items-center justify-around bg-[070815] mt-0 m-auto sm:min-w-[600px] lg:min-w-[900px]"
+      }
     >
-      <h1
-        style={{
-          fontSize: "2.5rem",
-          fontWeight: "bold",
-          textAlign: "center",
-          marginBottom: "20px",
-          color: "white",
-        }}
-      >
-        User Progress
+      <h1 className="text-4xl font-bold text-center mb-10 text-[#CBD5E1] mt-10">
+        Challenges
       </h1>
-
-      <table
-        style={{
-          width: "100%",
-          borderCollapse: "collapse",
-          marginBottom: "20px",
-          color: "black",
-        }}
-      >
-        <thead>
-          <tr>
-            <th
-              style={{
-                padding: "10px",
-                textAlign: "left",
-                borderBottom: "2px solid #ddd",
-                fontSize: "1.2rem",
-                color: "white",
-              }}
-            >
-              Question Title
-            </th>
-            <th
-              style={{
-                padding: "10px",
-                textAlign: "left",
-                borderBottom: "2px solid #ddd",
-                fontSize: "1.2rem",
-                color: "white",
-              }}
-            >
-              Difficulty
-            </th>
-            <th
-              style={{
-                padding: "10px",
-                textAlign: "left",
-                borderBottom: "2px solid #ddd",
-                fontSize: "1.2rem",
-                color: "white",
-              }}
-            >
-              Status
-            </th>
-            <th
-              style={{
-                padding: "10px",
-                textAlign: "left",
-                borderBottom: "2px solid #ddd",
-                fontSize: "1.2rem",
-                color: "white",
-              }}
-            >
-              Attempts
-            </th>
-          </tr>
-        </thead>
-        <tbody style={{  }}>
+      <div className="md:flex flex:col gap-10 ml-10 mr-10">
+        <SortByOptions setSortBy={setSortBy} />
+        <div className="flex flex-col gap-5 mt-10">
           {progress.map((entry) => (
-
-            <tr key={entry.slug} style={{ backgroundColor: entry.status === 'completed' ? '#f0f8ff' : '#fff' }}>
-              <td style={{ padding: '10px', borderBottom: '1px solid #ddd', color: 'blue', cursor: 'pointer' }} >
-
-                {entry.title}
-              </td>  
-              <td style={{ padding: '10px', borderBottom: '1px solid #ddd', color: 'black' }}>{entry.difficulty}</td>
-              <td style={{ padding: '10px', borderBottom: '1px solid #ddd', color: entry.status === 'completed' ? 'green' : 'red' }}>
-                {entry.status === 'completed' ? '✔️ Completed' : '⏳ Incomplete'}
-              </td>
-              <td
-                style={{
-                  padding: "10px",
-                  borderBottom: "1px solid #ddd",
-                  color: "black",
-                }}
-              >
-                {entry.difficulty}
-              </td>
-              <td
-                style={{
-                  padding: "10px",
-                  borderBottom: "1px solid #ddd",
-                  color: entry.status === "completed" ? "green" : "red",
-                }}
-              >
-                {entry.status === "completed"
-                  ? "✔️ Completed"
-                  : "⏳ Incomplete"}
-              </td>
-              <td
-                style={{
-                  padding: "10px",
-                  borderBottom: "1px solid #ddd",
-                  color: "black",
-                }}
-              >
-                {entry.attempts}
-              </td>
-            </tr>
+            <KataCard
+              key={entry.slug}
+              title={entry.title}
+              difficulty={entry.difficulty}
+              description={entry.description}
+              slug={entry.slug}
+            />
           ))}
-        </tbody>
-      </table>
-
-      <div style={{ textAlign: "center" }}>
-        <button
-          // onClick={() => router.push('/detailed-report')}
-          style={{
-            padding: "10px 20px",
-            fontSize: "1.2rem",
-            backgroundColor: "#007BFF",
-            color: "#fff",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-            boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-          }}
-        >
-          View Detailed Report
-        </button>
+        </div>
       </div>
     </div>
   );
 };
-
-// onClick={() => handleQuestionClick(entry.questionId)}
 
 export default Dashboard;

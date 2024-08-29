@@ -4,7 +4,7 @@ import * as React from "react";
 type User = null | {
   username: string;
   avatar: string;
-  problems_solved: [];
+  problems_solved: string[];
   isLoggedIn: boolean;
 };
 type UserContextType = {
@@ -15,7 +15,7 @@ const UserContextDefualtValues: UserContextType = {
   user: {
     username: "bob",
     avatar:
-      "https://www.iconpacks.net/icons/2/free-user-profile-icon-4255-thumb.png",
+     "/default-avatar.webp",
     problems_solved: [],
     isLoggedIn: false,
   },

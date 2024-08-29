@@ -1,7 +1,6 @@
 import Link from "next/link";
-import Code from "../icons/Code";
-import Code2 from "../icons/ray-so-export (2).png";
 import Image from "next/image";
+import productDemo from '../../icons/Home-Img.png'
 export default function Hero() {
 	return (
 		<section className="max-w-7xl m-auto">
@@ -35,8 +34,8 @@ export default function Hero() {
 				</Link>
 			</div>
 			<div className="mt-8">
-				<div className="h-[500px] border-1 border-[#BFDBFE] flex items-center justify-center bg-[#BFDBFE1A]">
-					{/* <Image src={Code2} alt="Code" width={900} quality={100} layout="responsive" /> */}
+				<div className="items-center justify-center bg-[#BFDBFE1A] p-6 rounded-md mt-24 hidden lg:flex">
+					<Image src={productDemo} alt="Code" width={900} quality={100} layout="responsive" className="rounded-md" />
 				</div>
 			</div>
 		</section>

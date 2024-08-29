@@ -1,38 +1,15 @@
-
-"use client"
-import React from 'react';
-import UserProfile from './UserProfile';
-import UserSolutions from './AcceptedSolutions'; 
-
-
-//placeholder for userssData--->
-const dummyData = {
-  avatar_url: '', //  <-----if empty string defaults to default avatar.
-  username: 'sam',
-  problems_solved: [ 
-    { title: 'Make Counter', difficulty: 'Easy'},
-    { title: 'Mean', difficulty: 'Easy' }
-  ]
-};
+"use client";
+import React, { useContext } from "react";
+import UserProfile from "./UserProfile";
+import UserSolutions from "./AcceptedSolutions";
+import { UserContext } from "../Context/UserProvider";
 
 const ProfilePage: React.FC = () => {
+  const { user } = useContext(UserContext);
   return (
-    <div style={{
-      display: 'flex', 
-      justifyContent: 'center', 
-      alignItems: 'flex-start',
-      marginTop: '50px',
-      gap: '20px',
-      flexWrap: 'wrap', 
-      padding: '0 50px',
-    }}>
-      <UserProfile
-        avatarUrl={dummyData.avatar_url}
-        username={dummyData.username}
-      />
-      <UserSolutions
-        problemsSolved={dummyData.problems_solved}
-      />
+    <div className="flex justify-center items-start mt-12 gap-5 flex-wrap px-12 mb-16">
+      <UserProfile />
+      <UserSolutions />
     </div>
   );
 };
