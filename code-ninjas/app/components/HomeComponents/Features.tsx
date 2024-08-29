@@ -1,4 +1,7 @@
-import React from "react";
+import Image from "next/image";
+import Gemini from '../../icons/google-gemini-icon (1).png'
+import codingLanguages from '../../icons/NicePng_languages-icon-png_3801129.png'
+import Leaderboard from '../../icons/podium.png'
 
 export default function Features() {
 	return (
@@ -16,8 +19,8 @@ export default function Features() {
 							to help you crack even the most challenging questions
 						</p>
 					</div>
-					<div className="md:w-1/2 h-[200px] bg-[#BFDBFE1A] grid place-content-center">
-						<p>Image Of Feature Here</p>
+					<div className="md:w-1/2 flex justify-center">
+						<Image src={Gemini} alt="AI" height={200} width={200} quality={100} className="rounded-xl"  />
 					</div>
 				</div>
 				<div className="border rounded-lg px-10 py-12 flex flex-col md:flex-row-reverse md:items-center gap-6 md:gap-10">
@@ -31,11 +34,11 @@ export default function Features() {
 							challenges in Python, Java, C++, and more.
 						</p>
 					</div>
-					<div className="md:w-1/2 h-[200px] bg-[#BFDBFE1A] grid place-content-center">
-						<p>Image Of Feature Here</p>
+					<div className="md:w-1/2 flex justify-center">
+						<Image src={codingLanguages} alt="coding-languages" height={220} width={220} quality={100} className="rounded-xl"  />
 					</div>
 				</div>
-				<div className="border rounded-lg px-10 py-12 flex flex-col md:flex-row gap-6 md:items-center md:gap-10">
+				{/* <div className="border rounded-lg px-10 py-12 flex flex-col md:flex-row gap-6 md:items-center md:gap-10">
 					<div className="md:w-1/2 ">
 						<h3 className="text-xl font-semibold px-4 md:mb-6">
 							Detailed Solutions
@@ -49,8 +52,8 @@ export default function Features() {
 					<div className="md:w-1/2 h-[200px] bg-[#BFDBFE1A] grid place-content-center">
 						<p>Image Of Feature Here</p>
 					</div>
-				</div>
-				<div className="border rounded-lg px-10 py-12 flex flex-col md:flex-row-reverse gap-6 md:items-center md:gap-10">
+				</div> */}
+				<div className="border rounded-lg px-10 py-12 flex flex-col md:flex-row gap-6 md:items-center md:gap-10">
 					<div className="md:w-1/2 ">
 						<h3 className="text-xl font-semibold px-4 md:mb-6">
 							Community & Leaderboards
@@ -61,8 +64,8 @@ export default function Features() {
 							the least time!
 						</p>
 					</div>
-					<div className="md:w-1/2 h-[200px] bg-[#BFDBFE1A] grid place-content-center">
-						<p>Image Of Feature Here</p>
+					<div className="md:w-1/2 flex justify-center">
+						<Image src={Leaderboard} alt="AI" height={200} width={200} quality={100} className="rounded-xl"  />
 					</div>
 				</div>
 			</div>
