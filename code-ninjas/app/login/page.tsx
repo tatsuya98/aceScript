@@ -15,7 +15,6 @@ export default function Login(): React.JSX.Element {
 	const [loading, setLoading] = React.useState(false);
 	const { setUser } = React.useContext(UserContext);
 	const router = useRouter();
-
 	const handleLogin = async (): Promise<void> => {
 		try {
 			setLoading(true);

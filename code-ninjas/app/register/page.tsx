@@ -47,6 +47,7 @@ export default function Register() {
   }, [username, password]);
   return (
     <>
+      <h1 className="text-3xl font-bold text-center">Register</h1>
       {error && <p className="text-red-500 font-bold text-center">{error}</p>}
       <form
         className="flex flex-col gap-4 max-w-md mt-10 m-auto"
@@ -72,7 +73,7 @@ export default function Register() {
             className=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             onClick={handleRegister}
           >
-            Register 
+            Register
           </button>
         ) : (
           <button
