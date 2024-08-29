@@ -15,45 +15,39 @@ export default function FAQs() {
 				className=""
 			>
 				<AccordionItem value="item-1">
-					<AccordionTrigger>Is it animated?</AccordionTrigger>
+					<AccordionTrigger>How do I create an account?</AccordionTrigger>
 					<AccordionContent>
-						Yes. It&apos;s animated by default, but you can disable it if you
-						prefer.
+					To create an account, click on the `Register` button on top left of the page.
 					</AccordionContent>
 				</AccordionItem>
         <AccordionItem value="item-2">
-					<AccordionTrigger>Is it animated?</AccordionTrigger>
+					<AccordionTrigger>How do I search for problems?</AccordionTrigger>
 					<AccordionContent>
-						Yes. It&apos;s animated by default, but you can disable it if you
-						prefer.
+						Once you are logged in click on the dashboard button at the top of the page.
 					</AccordionContent>
 				</AccordionItem>
 				<AccordionItem value="item-3">
-					<AccordionTrigger>Is it animated?</AccordionTrigger>
+					<AccordionTrigger>Which programming languages are supported?</AccordionTrigger>
 					<AccordionContent>
-						Yes. It&apos;s animated by default, but you can disable it if you
-						prefer.
+					Our platform supports JavaScript only. We plan to add support for multiple programming languages, including Python, Java, C++, etc.
 					</AccordionContent>
 				</AccordionItem>
         <AccordionItem value="item-4">
-					<AccordionTrigger>Is it animated?</AccordionTrigger>
+					<AccordionTrigger>Why did my submission fail?</AccordionTrigger>
 					<AccordionContent>
-						Yes. It&apos;s animated by default, but you can disable it if you
-						prefer.
+					Common reasons for failure include incorrect logic, syntax errors, or failing edge cases. Review the problem requirements and test cases to debug your code.
 					</AccordionContent>
 				</AccordionItem>
         <AccordionItem value="item-5">
-					<AccordionTrigger>Is it animated?</AccordionTrigger>
+					<AccordionTrigger>How is my code evaluated?</AccordionTrigger>
 					<AccordionContent>
-						Yes. It&apos;s animated by default, but you can disable it if you
-						prefer.
+					Your code is evaluated against a set of test cases. You need to pass all test cases for your submission to be considered correct.
 					</AccordionContent>
 				</AccordionItem>
         <AccordionItem value="item-6">
-					<AccordionTrigger>Is it animated?</AccordionTrigger>
+					<AccordionTrigger>My code editor is not working properly. How can I fix it?</AccordionTrigger>
 					<AccordionContent>
-						Yes. It&apos;s animated by default, but you can disable it if you
-						prefer.
+					Make sure your browser is up-to-date, disable any browser extensions that might interfere with the editor, or try using a different browser.
 					</AccordionContent>
 				</AccordionItem>
 			</Accordion>
