@@ -47,6 +47,7 @@ const UserProfile = () => {
   };
 
   const handleDeleteProfile = async () => {
+    alert("are you sure you want to delete your profile")
     try {
       const response = await fetch(`/api/users/${user?.username}`, {
         method: "DELETE",

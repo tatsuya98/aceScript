@@ -74,7 +74,7 @@ const Dashboard: React.FC = () => {
       <h1 className="text-4xl font-bold text-center mb-10 text-[#CBD5E1] mt-10">
         Challenges
       </h1>
-      <div className="flex gap-10">
+      <div className="md:flex flex:col gap-10 ml-10 mr-10">
         <SortByOptions setSortBy={setSortBy} />
         <div className="flex flex-col gap-5 mt-10">
           {progress.map((entry) => (
