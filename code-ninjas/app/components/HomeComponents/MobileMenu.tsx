@@ -22,17 +22,18 @@ export default function MobileMenu({
   };
   return (
     <section
-      className={`bg-gray-800 absolute top-0 bottom-0 py-8 px-8 flex flex-col  gap-8 w-[97%] transition-[left,opacity] duration-1000 ${
+      className={`bg-gray-800 absolute top-0 bottom-0 py-8 px-8 flex flex-col z-10 gap-8 w-[97%] transition-[left,opacity] duration-1000 ${
         !showSideMenu ? "left-[-100%] opacity-0" : "opacity-100 left-0"
       } sm:hidden`}
     >
-      <Link href="/">Logo Inserted Here</Link>
       <div className="flex gap-4 mt-8">
-        <Avatar
-          src={user?.avatar}
-          alt={user?.username.slice(0, 1)}
-          sx={{ width: 24, height: 24 }}
-        />
+        {user?.avatar && (
+          <Avatar
+            src={user?.avatar}
+            alt={user?.username.slice(0, 1)}
+            sx={{ width: 24, height: 24 }}
+          />
+        )}
         <p className="self-center"> {user?.username}</p>
       </div>
       {user?.isLoggedIn && (
@@ -42,7 +43,7 @@ export default function MobileMenu({
         </Link>
       )}
       {!user?.isLoggedIn ? (
-        <Link href="/login" className="flex gap-5 items-center">
+        <Link href="/login" className="flex gap-5 mt-8 items-center">
           <Account />
 
           <p

@@ -75,7 +75,7 @@ export default function Register() {
         <p className="text-red-500 font-bold text-center mt-10">{error}</p>
       )}
       <form
-        className="flex flex-col gap-4 max-w-md mt-10 m-auto"
+        className="flex flex-col gap-4 w-4/5 justify-center items-center m-auto mt-10 sm:w-full"
         onSubmit={(e) => e.preventDefault()}
       >
         <div className="flex flex-col gap-2">
