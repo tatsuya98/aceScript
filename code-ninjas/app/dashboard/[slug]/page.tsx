@@ -1,7 +1,7 @@
 "use client";
 import CodeEditor from "@/app/components/CodeEditor";
 import React, { useState, useEffect, useContext } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography , Button } from "@mui/material";
 import { useParams } from "next/navigation";
 import { UserContext } from "../../Context/UserProvider";
 import { useRouter } from "next/navigation";
@@ -119,6 +119,10 @@ export default function Page() {
 						{question.example}
 					</Typography>
 				</Box>
+        <Box sx={{p:"2", display:"flex" }}>
+        <Button sx={{m:"0.5rem"}} variant="outlined" href="https://www.w3schools.com/">W3schools</Button>
+        <Button sx={{m:"0.5rem"}} variant="outlined" href="https://developer.mozilla.org/en-US/">MDN</Button>
+        </Box>
 			</Box>
 			<Box
 				sx={{
