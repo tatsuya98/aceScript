@@ -34,7 +34,29 @@ input {
   color: #070815;
 }
 
+@media (min-width: 1024px) {
+  .custom-height {
+    height: calc(90vh);
+  }
+}
 
+@media (min-width: 600px) {
+  .custom-height {
+    height: calc(100vh + 5rem);
+  }
+}
+
+@media (max-width: 600px) {
+  .custom-height {
+    height: calc(100vh);
+  }
+}
+
+/* @media (min-width: 30px) {
+  .custom-height {
+    height: calc(100vh + 15rem);
+  }
+} */
 
 
 /* CSS For Logo Slider */
