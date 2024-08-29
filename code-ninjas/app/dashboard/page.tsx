@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import SortByOptions from "../components/SortByOptions";
 import KataCard from "../components/KataCard";
-import { Box} from "@mui/material";
+import { Box } from "@mui/material";
 import LinearProgress from "@mui/material/LinearProgress";
 interface ResultData {
   title: string;
@@ -21,7 +21,7 @@ const Dashboard: React.FC = () => {
   const { user } = useContext(UserContext);
   const router = useRouter();
   const [sortBy, setSortBy] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
   useEffect(() => {
     if (!user?.isLoggedIn) {
       alert("Please login first");
@@ -44,13 +44,13 @@ const Dashboard: React.FC = () => {
         });
     } else {
       const fetchProgress = async () => {
-        try{
-          setLoading(true)
+        try {
+          setLoading(true);
           const data = await fetch("/api/katas").then((res) => res.json());
           const kataData = data.response;
           setProgress(kataData);
         } finally {
-          setLoading(false)
+          setLoading(false);
         }
       };
       fetchProgress();
@@ -58,12 +58,12 @@ const Dashboard: React.FC = () => {
   }, [sortBy]);
 
   if (loading) {
-		return (
-			<Box sx={{marginTop: '200px'}} >
-				<LinearProgress />
-			</Box>
-		);
-	}
+    return (
+      <Box sx={{ marginTop: "200px" }}>
+        <LinearProgress />
+      </Box>
+    );
+  }
 
   return (
     <div
@@ -71,7 +71,7 @@ const Dashboard: React.FC = () => {
         "flex flex-col items-center justify-around bg-[070815] mt-0 m-auto sm:min-w-[600px] lg:min-w-[900px]"
       }
     >
-      <h1 className="text-4xl font-bold text-center mb-10 text-[#CBD5E1] ">
+      <h1 className="text-4xl font-bold text-center mb-10 text-[#CBD5E1] mt-10">
         Challenges
       </h1>
       <div className="flex gap-10">
