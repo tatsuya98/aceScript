@@ -48,6 +48,7 @@ export default function Login(): React.JSX.Element {
   }, [username, password]);
   return (
     <>
+      <h1 className="text-3xl font-bold text-center">Login</h1>
       {error && <p className="text-red-500 font-bold text-center">{error}</p>}
       <form
         className="flex flex-col gap-4 max-w-md mt-10 m-auto"

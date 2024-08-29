@@ -21,8 +21,8 @@ export default function ProfileDropDown() {
   return (
     <>
       <Avatar
-        alt="profile icon"
-        src={user?.avatar|| "https://freesvg.org/img/abstract-user-flat-4.png" }
+        alt={user?.username.slice(0, 1)}
+        src={user?.avatar || "https://freesvg.org/img/abstract-user-flat-4.png"}
         onClick={handleClick}
         className="cursor-pointer"
       />
