@@ -79,13 +79,13 @@ export default function Login(): React.JSX.Element {
     );
   }
   return (
-    <>
+    <div>
       <h1 className="text-3xl font-bold text-center mt-10">Login</h1>
       {error && (
         <p className="text-red-500 font-bold text-center mt-10">{error}</p>
       )}
       <form
-        className="flex flex-col gap-4 max-w-md mt-10 m-auto"
+        className="flex flex-col gap-4 w-4/5 justify-center items-center m-auto mt-10"
         onSubmit={(e) => e.preventDefault()}
       >
         <div className="flex flex-col gap-2">
@@ -94,6 +94,7 @@ export default function Login(): React.JSX.Element {
             type="text"
             name="username"
             id="username"
+            className=""
             value={username}
             onChange={(e) => handleInputChange(e.target.value, setUsername)}
             onBlur={() => checkInput(username, setIsUserError)}
@@ -144,6 +145,6 @@ export default function Login(): React.JSX.Element {
           </button>
         )}
       </form>
-    </>
+    </div>
   );
 }
