@@ -85,7 +85,7 @@ export default function Login(): React.JSX.Element {
         <p className="text-red-500 font-bold text-center mt-10">{error}</p>
       )}
       <form
-        className="flex flex-col gap-4 w-4/5 justify-center items-center m-auto mt-10"
+        className="flex flex-col gap-4 w-4/5 justify-center sm:w-1/3 m-auto mt-10"
         onSubmit={(e) => e.preventDefault()}
       >
         <div className="flex flex-col gap-2">
