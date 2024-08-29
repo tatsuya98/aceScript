@@ -39,7 +39,7 @@ export default function KataCard({
         <Link className="w-fit" href={`/dashboard/${slug}`}>
           <h1 className="text-white font-bold">{title}</h1>
         </Link>
-        <p className="text-white">{description}</p>
+        <p className=" hidden sm:block text-white">{description}</p>
         <p
           className={` ${
             user?.problems_solved.includes(slug)
