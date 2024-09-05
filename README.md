@@ -1,4 +1,4 @@
-# nc-final-Project
+# AceScript
 # Live version: https://ace-script-m5r52okpx-nathans-projects-3139128f.vercel.app/
 # username: bob123 password: 123456 to access dashboard
 # description
