@@ -66,29 +66,33 @@ const Dashboard: React.FC = () => {
   }
 
   return (
-    <div
-      className={
-        "flex flex-col items-center justify-around bg-[070815] mt-0 m-auto sm:min-w-[600px] lg:min-w-[900px]"
-      }
-    >
-      <h1 className="text-4xl font-bold text-center mb-10 text-[#CBD5E1] mt-10">
-        Challenges
-      </h1>
-      <div className="md:flex flex:col gap-10 ml-10 mr-10">
-        <SortByOptions setSortBy={setSortBy} />
-        <div className="flex flex-col gap-5 mt-10">
-          {progress.map((entry) => (
-            <KataCard
-              key={entry.slug}
-              title={entry.title}
-              difficulty={entry.difficulty}
-              description={entry.description}
-              slug={entry.slug}
-            />
-          ))}
+    <>
+      {user && user?.isLoggedIn && (
+        <div
+          className={
+            "flex flex-col items-center justify-around bg-[070815] mt-0 m-auto sm:min-w-[600px] lg:min-w-[900px]"
+          }
+        >
+          <h1 className="text-4xl font-bold text-center mb-10 text-[#CBD5E1] mt-10">
+            Challenges
+          </h1>
+          <div className="md:flex flex:col gap-10 ml-10 mr-10">
+            <SortByOptions setSortBy={setSortBy} />
+            <div className="flex flex-col gap-5 mt-10">
+              {progress.map((entry) => (
+                <KataCard
+                  key={entry.slug}
+                  title={entry.title}
+                  difficulty={entry.difficulty}
+                  description={entry.description}
+                  slug={entry.slug}
+                />
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 
