@@ -1,6 +1,5 @@
 "use client";
 import * as React from "react";
-import FormInput from "../components/forInput";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { UserContext } from "../Context/UserProvider";
@@ -19,7 +18,10 @@ export default function Login(): React.JSX.Element {
   const { setUser } = React.useContext(UserContext);
   const router = useRouter();
 
-  const handleLogin = async (): Promise<void> => {
+  const handleLogin = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
+    e.preventDefault();
     try {
       setLoading(true);
       const response = await fetch(`/api/login`, {
@@ -36,6 +38,7 @@ export default function Login(): React.JSX.Element {
       const data = await response.json();
 
       if (data.message) {
+        console.log(data);
         setError(data.message);
         return;
       }
@@ -86,7 +89,7 @@ export default function Login(): React.JSX.Element {
       )}
       <form
         className="flex flex-col gap-4 w-4/5 justify-center sm:w-1/4 m-auto mt-10"
-        onSubmit={(e) => e.preventDefault()}
+        onSubmit={handleLogin}
       >
         <div className="flex flex-col gap-2">
           <label htmlFor="username">Username</label>
@@ -132,7 +135,7 @@ export default function Login(): React.JSX.Element {
         {isAllInputFilled ? (
           <button
             className="bg-blue-500 hover:bg-blue-700  text-white font-bold py-2 px-4 rounded"
-            onClick={handleLogin}
+            type="submit"
           >
             Login
           </button>

@@ -9,7 +9,7 @@ type UserSolutionsProps = {
 const UserSolutions: React.FC<UserSolutionsProps> = () => {
   const { user, setUser } = useContext(UserContext);
   return (
-    <div className="p-12 w-[400px] h-[770px] bg-[#BFDBFE1A] rounded-lg border border-white">
+    <div className="p-12 w-[400px] h-[740px] bg-[#BFDBFE1A] rounded-lg border border-white">
       <h1 className="text-2xl font-bold mb-5 text-white">Challenges solved</h1>
       {user?.problems_solved.length > 0 ? (
         user?.problems_solved.map((problem, index) => (

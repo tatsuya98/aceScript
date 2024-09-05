@@ -5,7 +5,7 @@ require("dotenv").config({
   path: `${__dirname}/../../.env`,
 });
 
-const uri = process.env.MONGODB_DEV_URI!;
+const uri = process.env.MONGODB_URI!;
 
 export const client = new MongoClient(uri);
 export const db = client.db(ENV);

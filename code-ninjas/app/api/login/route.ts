@@ -7,7 +7,6 @@ export async function POST(nextRequest: NextRequest) {
     const response = await fetchUserLoginAttempt(username, password);
     return NextResponse.json(response, { status: 200 });
   } catch (error: any) {
-    console.error("Error authenticating user:", error);
     return NextResponse.json(
       { message: error.message },
       { status: error.status }

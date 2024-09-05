@@ -55,7 +55,7 @@ const Dashboard: React.FC = () => {
       };
       fetchProgress();
     }
-  }, [sortBy]);
+  }, [sortBy, user?.isLoggedIn, user?.problems_solved, router]);
 
   if (loading) {
     return (

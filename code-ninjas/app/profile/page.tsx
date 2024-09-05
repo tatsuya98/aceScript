@@ -1,16 +1,27 @@
 "use client";
-import React, { useContext } from "react";
+import * as React from "react";
 import UserProfile from "./UserProfile";
 import UserSolutions from "./AcceptedSolutions";
 import { UserContext } from "../Context/UserProvider";
-
-const ProfilePage: React.FC = () => {
-  const { user } = useContext(UserContext);
+import { useRouter } from "next/navigation";
+const ProfilePage = (): React.JSX.Element => {
+  const router = useRouter();
+  const { user } = React.useContext(UserContext);
+  React.useEffect(() => {
+    if (!user?.isLoggedIn) {
+      alert("Please login first");
+      router.push("/login");
+    }
+  });
   return (
-    <div className="flex justify-center items-start mt-12 gap-5 flex-wrap px-12 mb-16">
-      <UserProfile />
-      <UserSolutions />
-    </div>
+    <>
+      {user?.isLoggedIn && (
+        <div className="flex justify-center items-start mt-12 gap-5 flex-wrap px-12 mb-16">
+          <UserProfile />
+          <UserSolutions />
+        </div>
+      )}
+    </>
   );
 };
 

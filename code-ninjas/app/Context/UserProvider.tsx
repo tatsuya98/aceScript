@@ -14,8 +14,7 @@ type UserContextType = {
 const UserContextDefualtValues: UserContextType = {
   user: {
     username: "bob",
-    avatar:
-     "/default-avatar.webp",
+    avatar: "/default-avatar.webp",
     problems_solved: [],
     isLoggedIn: false,
   },

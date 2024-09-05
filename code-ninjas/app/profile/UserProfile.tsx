@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import ProgressCircle from "../components/ProgressCircle";
 import { UserContext } from "../Context/UserProvider";
+import Image from "next/image";
 
 const UserProfile = () => {
   const { user, setUser } = useContext(UserContext);
@@ -47,7 +48,7 @@ const UserProfile = () => {
   };
 
   const handleDeleteProfile = async () => {
-    alert("are you sure you want to delete your profile")
+    alert("are you sure you want to delete your profile");
     try {
       const response = await fetch(`/api/users/${user?.username}`, {
         method: "DELETE",
@@ -72,10 +73,12 @@ const UserProfile = () => {
 
   return (
     <div className="flex flex-col items-center p-12 w-[500px]  bg-opacity-10 bg-blue-200 rounded-lg shadow-lg border border-white">
-      <img
+      <Image
         src={user?.avatar || "/default-avatar.webp"}
         alt="User Avatar"
-        className="w-48 h-48 rounded-full mb-5"
+        width={175}
+        height={175}
+        className="w-40 h-40 rounded-full mb-5"
       />
       <h1 className="text-4xl font-bold mb-2.5 text-white">
         {user ? user.username : "Not Logged-in"}

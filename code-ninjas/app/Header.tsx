@@ -11,13 +11,9 @@ import MobileMenu from "./components/HomeComponents/MobileMenu";
 export default function Header() {
   const [showSideMenu, setShowSideMenu] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
-  const [mobileWidth, setMobileWidth] = useState(window.innerWidth);
   const { user } = useContext(UserContext);
   const handleMenuToggle = () => {
     setShowSideMenu(!showSideMenu);
-  };
-  const handleResize = () => {
-    setMobileWidth(window.innerWidth);
   };
   useEffect(() => {
     if (user?.isLoggedIn) {
@@ -25,12 +21,7 @@ export default function Header() {
     } else {
       setShowProfile(false);
     }
-    window.addEventListener("resize", handleResize);
-    handleResize();
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [user?.isLoggedIn, mobileWidth]);
+  }, [user?.isLoggedIn]);
 
   return (
     <>
@@ -66,15 +57,15 @@ export default function Header() {
             <p>Sign In / Register</p>
           </Link>
         ) : (
-          mobileWidth > 640 && <ProfileDropDown />
+          <ProfileDropDown />
         )}
       </header>
-      {mobileWidth <= 640 && (
+      <div className="hidden sm:flex">
         <MobileMenu
           handleMenuToggle={handleMenuToggle}
           showSideMenu={showSideMenu}
         />
-      )}
+      </div>
     </>
   );
 }
