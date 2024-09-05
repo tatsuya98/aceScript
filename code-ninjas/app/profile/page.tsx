@@ -12,7 +12,7 @@ const ProfilePage = (): React.JSX.Element => {
       alert("Please login first");
       router.push("/login");
     }
-  });
+  }, []);
   return (
     <>
       {user?.isLoggedIn && (
