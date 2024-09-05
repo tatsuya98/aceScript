@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest -i ./code-ninjas/__tests__",
-    "seed": "ts-node ./app/mongodb/run-seed.ts"
+    "seed": "ts-node ./app/mongodb/run-seed.ts",
+    "seed-prod": "NODE_ENV=production npm run seed"
   },
   "dependencies": {
     "@emotion/react": "^11.13.0",
@@ -22,6 +23,7 @@
     "@tsparticles/engine": "^3.5.0",
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.5.0",
+    "@vercel/speed-insights": "^1.0.12",
     "axios": "^1.7.4",
     "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",
