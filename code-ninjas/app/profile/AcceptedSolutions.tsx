@@ -11,7 +11,7 @@ const UserSolutions: React.FC<UserSolutionsProps> = () => {
   return (
     <div className="p-12 w-[400px] h-[740px] bg-[#BFDBFE1A] rounded-lg border border-white">
       <h1 className="text-2xl font-bold mb-5 text-white">Challenges solved</h1>
-      {user?.problems_solved.length > 0 ? (
+      {user && user?.problems_solved.length > 0 ? (
         user?.problems_solved.map((problem, index) => (
           <p key={index} className="text-xl text-white mb-2">
             <Link href={`/dashboard/${problem}`} className="text-green-500">
