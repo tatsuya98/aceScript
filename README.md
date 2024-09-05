@@ -1,5 +1,5 @@
 # AceScript
-# Live version: https://ace-script-m5r52okpx-nathans-projects-3139128f.vercel.app/
+# Live version: https://ace-script.vercel.app/
 # username: bob123 password: 123456 to access dashboard
 # description
 AceScript is an app that is designed to help aspiring developers feel more confident for coding interviews by providing katas and possibly in the future mock interviews using ai.
