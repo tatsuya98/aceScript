@@ -33,8 +33,8 @@ const UserProfile = () => {
 
         const data = await response.json();
 
-        if (response.ok) {
-          setUser((prevUser) => ({ ...prevUser, avatar: newAvatarUrl }));
+        if (response.ok && user) {
+         setUser({ ...user, avatar: newAvatarUrl });
           alert("Avatar updated successfully!");
         } else {
           throw new Error(data.message || "Failed to update avatar");
