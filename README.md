@@ -4,8 +4,8 @@
 # description
 AceScript is an app that is designed to help aspiring developers feel more confident for coding interviews by providing katas and possibly in the future mock interviews using ai.
 # Tech Stack
-Frontend: NextJS, TailwindCss, MaterialUi
-Backend: MongoDb bcrypt, ZOD
+Frontend: NextJS, TailwindCss, MaterialUi <br/>
+Backend: MongoDb bcrypt, ZOD <br/>
 Testing: Jest, Supertest
 # instructions
 1. fork the repo
