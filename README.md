@@ -10,7 +10,7 @@ For this project, we decided to use **Next.js** for the frontend, **Tailwind CSS
 
 The core functionality of AceScript allows users to solve coding challenges at varying levels of difficulty. What you're seeing here is our Minimum Viable Product (MVP). On the landing page, you'll find a "Coming Soon" section that outlines potential ideas for expanding and further developing the project, given more time.
 
-# demoing the site:
+# demoing the site: https://ace-script.vercel.app/
 username: bob123 password: 123456
 
 ## Running the Application Locally
