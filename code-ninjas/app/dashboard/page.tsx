@@ -55,7 +55,7 @@ const Dashboard: React.FC = () => {
       };
       fetchProgress();
     }
-  }, []);
+  }, [sortBy]);
 
   if (loading) {
     return (
